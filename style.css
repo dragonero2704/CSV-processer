@@ -55,3 +55,12 @@ td{
     background-color: transparent;
     padding: 5px;
 }
+
+.tableContainer{
+    overflow-x: scroll;
+    transform: rotate(180deg);
+}
+
+.tableContainer table{
+    transform: rotate(180deg);
+}

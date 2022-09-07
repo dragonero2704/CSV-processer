@@ -56,7 +56,7 @@ if (!empty($_FILES['fileupload'])) {
     </form>
     <?php
     if(!empty($csv)){
-        echo "<table>";
+        echo "<div class='tableContainer mt10'><table>";
         foreach ($csv->getRows() as $row) {
             echo "<tr>";
             foreach($row as $element){
@@ -64,7 +64,7 @@ if (!empty($_FILES['fileupload'])) {
             }
             echo "</tr>";
         }
-        echo "</table>";
+        echo "</table></div>";
 
     }
 
