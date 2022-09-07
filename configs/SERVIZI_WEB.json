@@ -1,59 +1,62 @@
 {
-    "DOMINIO":[
-        "NOME CLIENTE",
-        "DOMINIO",
-        "DNS",
-        "DOMINIO",
-        "DOMINIO COSTO",
-        "SCADENZA DOMINIO"
-    ],
-    "HOSTING":[
-        "NOME CLIENTE",
-        "DOMINIO",
-        "HOSTING",
-        "HOSTING COSTO",
-        "SCADENZA HOSTING"
-    ],
-    "POSTA":[
-        "NOME CLIENTE",
-        "DOMINIO",
-        "POSTA",
-        "POSTA COSTO",
-        "SCADENZA POSTA"
-    ],
-    "SMTP":[
-        "NOME CLIENTE",
-        "DOMINIO",
-        "SMTP",
-        "SMATP COSTO",
-        "SCADENZA SMTP"
-    ],
-    "ANTIVIRUS":[
-        "NOME CLIENTE",
-        "DOMINIO",
-        "ANTI",
-        "ANTI COSTO",
-        "SCANDEZA ANTISPAM"
-    ],
-    "SSL":[
-        "NOME CLIENTE",
-        "DOMINIO",
-        "SSL"
-    ],
-    "PEC":[
-        "NOME CLIENTE",
-        "DOMINIO",
-        "PEC",
-        "PEC COSTO",
-        "SCADENZA PEC"
-    ],
-    "COOKIEBOT":[
-        "NOME CLIENTE",
-        "DOMINIO",
-        "COOKIEBOT",
-        "COOKIEBOT COSTO"
-    ],
-    "AUT":[
-        "AUT"
-    ]
+    "TABLENAME": "servizi attivi",
+    "ROWSTEPS": {
+        "DOMINIO": [
+            "NOME CLIENTE",
+            "DOMINIO",
+            "DNS",
+            "DOMINIO",
+            "DOMINIO COSTO",
+            "SCADENZA DOMINIO"
+        ],
+        "HOSTING": [
+            "NOME CLIENTE",
+            "DOMINIO",
+            "HOSTING",
+            "HOSTING COSTO",
+            "SCADENZA HOSTING"
+        ],
+        "POSTA": [
+            "NOME CLIENTE",
+            "DOMINIO",
+            "POSTA",
+            "POSTA COSTO",
+            "SCADENZA POSTA"
+        ],
+        "SMTP": [
+            "NOME CLIENTE",
+            "DOMINIO",
+            "SMTP",
+            "SMATP COSTO",
+            "SCADENZA SMTP"
+        ],
+        "ANTIVIRUS": [
+            "NOME CLIENTE",
+            "DOMINIO",
+            "ANTI",
+            "ANTI COSTO",
+            "SCANDEZA ANTISPAM"
+        ],
+        "SSL": [
+            "NOME CLIENTE",
+            "DOMINIO",
+            "SSL"
+        ],
+        "PEC": [
+            "NOME CLIENTE",
+            "DOMINIO",
+            "PEC",
+            "PEC COSTO",
+            "SCADENZA PEC"
+        ],
+        "COOKIEBOT": [
+            "NOME CLIENTE",
+            "DOMINIO",
+            "COOKIEBOT",
+            "COOKIEBOT COSTO"
+        ],
+        "AUT": [
+            "AUT"
+        ]
+    }
 }
