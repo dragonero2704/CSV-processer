@@ -1,19 +1,14 @@
 <?php
 require('./db.php');
+require('./csv.php');
 // controllare https://csv.thephpleague.com/ per la libreria di processing del csv
-if (!empty($_FILES['upload'])) {
+
+if (!empty($_FILES['fileupload'])) {
     try {
         // Undefined | Multiple Files | $_FILES Corruption Attack
         // If this request falls under any of them, treat it invalid.
-        if (
-            !isset($_FILES['upfile']['error']) ||
-            is_array($_FILES['upfile']['error'])
-        ) {
-            throw new RuntimeException('Invalid parameters.');
-        }
-
-        // Check $_FILES['upfile']['error'] value.
-        switch ($_FILES['upfile']['error']) {
+        // Check $_FILES['upload']['error'] value.
+        switch ($_FILES['fileupload']['error']) {
             case UPLOAD_ERR_OK:
                 break;
             case UPLOAD_ERR_NO_FILE:
@@ -26,6 +21,15 @@ if (!empty($_FILES['upload'])) {
         }
     } catch (RuntimeException $e) {
         echo $e->getMessage();
+    }
+
+    //upload andato a buon fine
+    //controllo che il file sia effetivamente un csv
+    $filename = $_FILES['fileupload']['name'];
+    if(array_reverse(explode('.', $filename))[0] === 'csv'){
+        $csv = new CSV($_FILES['fileupload']);
+    }else{
+        $error = "Not a CSV file";
     }
 }
 ?>
@@ -46,10 +50,30 @@ if (!empty($_FILES['upload'])) {
     <p class="subtitle">dragonero2704</p>
 
     <h3 class="mt10 subtitle">Caricare un file CSV</h3>
-    <form action="<?= htmlentities($_SERVER['PHP_SELF']) ?>" method="get">
-        <input class="fileinput" type="file" name="filename">
+    <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="post" enctype="multipart/form-data">
+        <input class="fileinput" type="file" name="fileupload">
+        <input type="submit" value="Invia" name="submit">
     </form>
+    <?php
+    if(!empty($csv)){
+        echo "<table>";
+        foreach ($csv->getRows() as $row) {
+            echo "<tr>";
+            foreach($row as $element){
+                echo"<td>$element</td>";
+            }
+            echo "</tr>";
+        }
+        echo "</table>";
+
+    }
+
+    // $db = new Database();
+
+
+
+    ?>
+
 </body>
 
 </html>
-

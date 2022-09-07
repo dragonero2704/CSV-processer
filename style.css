@@ -19,7 +19,7 @@ body {
     margin: auto;
     padding: 5px;
     text-align: center;
-    background-color: rgb(213, 212, 212);
+    background-color: #a5a5a5;
 }
 
 .subtitle {
@@ -41,4 +41,17 @@ form {
 
 .mt10 {
     margin-top: 10px;
+}
+
+table{
+    border-spacing: 0px;
+}
+
+tr:nth-child(even){
+    background-color: #a5a5a5;
+}
+
+td{
+    background-color: transparent;
+    padding: 5px;
 }
