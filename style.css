@@ -1,0 +1,44 @@
+html {
+    font-family: 'Roboto', Helvetica, Arial, Lucida, sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.flow-root {
+    display: flow-root;
+}
+
+.title {
+    width: 100%;
+    margin: auto;
+    padding: 5px;
+    text-align: center;
+    background-color: rgb(213, 212, 212);
+}
+
+.subtitle {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    padding: 5px;
+}
+
+form {
+    width: fit-content;
+    margin: auto;
+}
+
+.fileinput {
+    margin: auto;
+    width: fit-content;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
