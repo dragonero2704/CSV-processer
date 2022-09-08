@@ -1,62 +1,213 @@
 {
     "TABLENAME": "servizi attivi",
+    "controllo": "true",
+    "controlObject": {
+        "checks": {
+            "F": "Fatturato 2022"
+        }
+    },
     "ROWSTEPS": {
-        "DOMINIO": [
-            "NOME CLIENTE",
-            "DOMINIO",
-            "DNS",
-            "DOMINIO",
-            "DOMINIO COSTO",
-            "SCADENZA DOMINIO"
-        ],
-        "HOSTING": [
-            "NOME CLIENTE",
-            "DOMINIO",
-            "HOSTING",
-            "HOSTING COSTO",
-            "SCADENZA HOSTING"
-        ],
-        "POSTA": [
-            "NOME CLIENTE",
-            "DOMINIO",
-            "POSTA",
-            "POSTA COSTO",
-            "SCADENZA POSTA"
-        ],
-        "SMTP": [
-            "NOME CLIENTE",
-            "DOMINIO",
-            "SMTP",
-            "SMATP COSTO",
-            "SCADENZA SMTP"
-        ],
-        "ANTIVIRUS": [
-            "NOME CLIENTE",
-            "DOMINIO",
-            "ANTI",
-            "ANTI COSTO",
-            "SCANDEZA ANTISPAM"
-        ],
-        "SSL": [
-            "NOME CLIENTE",
-            "DOMINIO",
-            "SSL"
-        ],
-        "PEC": [
-            "NOME CLIENTE",
-            "DOMINIO",
-            "PEC",
-            "PEC COSTO",
-            "SCADENZA PEC"
-        ],
-        "COOKIEBOT": [
-            "NOME CLIENTE",
-            "DOMINIO",
-            "COOKIEBOT",
-            "COOKIEBOT COSTO"
-        ],
-        "AUT": [
-            "AUT"
-        ]
+        "DOMINIO": {
+            "NOME CLIENTE": {
+                "search": "true",
+                "fieldToInsert": "",
+                "tableToSearch": "nome tabella"
+            },
+            "DOMINIO": {
+                "search": "true",
+                "fieldToInsert": "",
+                "tableToSearch": "nome tabella"
+            },
+            "DNS": {
+                "search": "true",
+                "fieldToInsert": "",
+                "tableToSearch": "nome tabella"
+            },
+            "DOMINIO PREZZO": {
+                "search": "false",
+                "fieldToInsert": ""
+            },
+            "DOMINIO COSTO": {
+                "search": "false",
+                "fieldToInsert": ""
+            },
+            "SCADENZA DOMINIO": {
+                "search": "false",
+                "fieldToInsert": ""
+            }
+        },
+        "HOSTING": {
+            "NOME CLIENTE": {
+                "search": "true",
+                "fieldToInsert": "",
+                "tableToSearch": "nome tabella"
+            },
+            "DOMINIO": {
+                "search": "true",
+                "fieldToInsert": "",
+                "tableToSearch": "nome tabella"
+            },
+            "HOSTING": {
+                "search": "false",
+                "fieldToInsert": ""
+            },
+            "HOSTING COSTO": {
+                "search": "false",
+                "fieldToInsert": ""
+            },
+            "SCADENZA HOSTING": {
+                "search": "false",
+                "fieldToInsert": ""
+            }
+        },
+        "POSTA": {
+            "NOME CLIENTE": {
+                "search": "true",
+                "fieldToInsert": "",
+                "tableToSearch": "nome tabella"
+            },
+            "DOMINIO": {
+                "search": "true",
+                "fieldToInsert": "",
+                "tableToSearch": "nome tabella"
+            },
+            "POSTA": {
+                "search": "false",
+                "fieldToInsert": ""
+            },
+            "POSTA COSTO": {
+                "search": "false",
+                "fieldToInsert": ""
+            },
+            "SCADENZA POSTA": {
+                "search": "false",
+                "fieldToInsert": ""
+            }
+        },
+        "SMTP": {
+            "NOME CLIENTE": {
+                "search": "true",
+                "fieldToInsert": "",
+                "tableToSearch": "nome tabella"
+            },
+            "DOMINIO": {
+                "search": "true",
+                "fieldToInsert": "",
+                "tableToSearch": "nome tabella"
+            },
+            "SMTP": {
+                "search": "false",
+                "fieldToInsert": ""
+            },
+            "SMATP COSTO": {
+                "search": "false",
+                "fieldToInsert": ""
+            },
+            "SCADENZA SMTP": {
+                "search": "false",
+                "fieldToInsert": ""
+            }
+        },
+        "ANTIVIRUS": {
+            "NOME CLIENTE": {
+                "search": "true",
+                "fieldToInsert": "",
+                "tableToSearch": "nome tabella"
+            },
+            "DOMINIO": {
+                "search": "true",
+                "fieldToInsert": "",
+                "tableToSearch": "nome tabella"
+            },
+            "ANTI": {
+                "search": "false",
+                "fieldToInsert": ""
+            },
+            "ANTI COSTO": {
+                "search": "false",
+                "fieldToInsert": ""
+            },
+            "SCANDEZA ANTISPAM": {
+                "search": "false",
+                "fieldToInsert": ""
+            }
+        },
+        "SSL": {
+            "NOME CLIENTE": {
+                "search": "true",
+                "fieldToInsert": "",
+                "tableToSearch": "nome tabella"
+            },
+            "DOMINIO": {
+                "search": "true",
+                "fieldToInsert": "",
+                "tableToSearch": "nome tabella"
+            },
+            "SSL": {
+                "search": "false",
+                "fieldToInsert": ""
+            }
+        },
+        "PEC": {
+            "NOME CLIENTE": {
+                "search": "true",
+                "fieldToInsert": "",
+                "tableToSearch": "nome tabella"
+            },
+            "DOMINIO": {
+                "search": "true",
+                "fieldToInsert": "",
+                "tableToSearch": "nome tabella"
+            },
+            "PEC": {
+                "search": "false",
+                "fieldToInsert": ""
+            },
+            "PEC COSTO": {
+                "search": "false",
+                "fieldToInsert": ""
+            },
+            "SCADENZA PEC": {
+                "search": "false",
+                "fieldToInsert": ""
+            }
+        },
+        "COOKIEBOT": {
+            "NOME CLIENTE": {
+                "search": "true",
+                "fieldToInsert": "",
+                "tableToSearch": "nome tabella"
+            },
+            "DOMINIO": {
+                "search": "true",
+                "fieldToInsert": "",
+                "tableToSearch": "nome tabella"
+            },
+            "COOKIEBOT": {
+                "search": "false",
+                "fieldToInsert": ""
+            },
+            "COOKIEBOT COSTO": {
+                "search": "false",
+                "fieldToInsert": ""
+            }
+        },
+        "AUT": {
+            "NOME CLIENTE": {
+                "search": "true",
+                "fieldToInsert": "",
+                "tableToSearch": "nome tabella"
+            },
+            "DOMINIO": {
+                "search": "true",
+                "fieldToInsert": "",
+                "tableToSearch": "nome tabella"
+            },
+            "AUT": {
+                "search": "false",
+                "fieldToInsert": ""
+            }
+        }
+
     }
 }

@@ -43,24 +43,29 @@ form {
     margin-top: 10px;
 }
 
-table{
+table {
     border-spacing: 0px;
 }
 
-tr:nth-child(even){
+tr:nth-child(even) {
     background-color: #a5a5a5;
 }
 
-td{
+td {
     background-color: transparent;
     padding: 5px;
 }
 
-.tableContainer{
+.tableContainer {
     overflow-x: scroll;
     transform: rotate(180deg);
 }
 
-.tableContainer table{
+.tableContainer table {
     transform: rotate(180deg);
+}
+
+.error {
+    color: red;
+    padding: 5px;
 }

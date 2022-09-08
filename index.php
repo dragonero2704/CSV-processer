@@ -2,7 +2,7 @@
 require('./db.php');
 require('./csv.php');
 // controllare https://csv.thephpleague.com/ per la libreria di processing del csv
-
+$error = "";
 if (!empty($_FILES['fileupload'])) {
     try {
         // Undefined | Multiple Files | $_FILES Corruption Attack
@@ -54,6 +54,9 @@ if (!empty($_FILES['fileupload'])) {
         <input class="fileinput" type="file" name="fileupload">
         <input type="submit" value="Invia" name="submit">
     </form>
+
+    <?php if(isset($error)){ echo "<p class='error'>$error<p>"; } ?>
+
     <?php
     if(!empty($csv)){
         echo "<div class='tableContainer mt10'><table>";
@@ -65,12 +68,39 @@ if (!empty($_FILES['fileupload'])) {
             echo "</tr>";
         }
         echo "</table></div>";
-
     }
 
-    // $db = new Database();
+    $db = new Database();
+    /*$ris = $db->query("SELECT *
+    FROM sys.Tables");
 
+    echo $ris;*/
+    $configuration = json_decode(file_get_contents("./configs/SERVIZI_WEB.json"), true);
+    print_r($configuration);
+    $cycles = $configuration->ROWSTEPS;
 
+    //scorro il csv riga per riga
+    $headers = $csv->getHeader();
+    $row = $csv->getNextRow(); //salto la prima linea che è l'header
+
+    while ($row = $csv->getNextRow()){
+        //operazione da eseguire per ogni linea
+
+        foreach($cycles as $key => $values){
+
+            //la $key indica il tipo di servizio
+
+            foreach($values as $head => $option){
+                //$head indica la colonna
+                if($options->search == true){
+                    //cerca tabella
+                    $target = $options->tableToSearch;
+                }
+            }
+        }
+    }
+
+    
 
     ?>
 

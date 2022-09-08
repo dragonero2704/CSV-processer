@@ -3,13 +3,22 @@
         public $filename = null;
         public $pathToFile = null;
         public $size = null;
-        public $stream = null;
+        private $stream = null;
+        protected $nRows = 0;
+        protected $nHeaders = 0;
 
         function __construct($file)
         {
             $this->filename = $file['name'];
             $this->pathToFile = $file['tmp_name'];
             $this->size = $file['size'];
+            $stream = fopen($this->pathToFile, 'r');
+            while($row = fgetcsv($stream, 10000, ',')){
+                if($this->nRows == 0){
+                    $this->nHeaders = sizeof($row);
+                }
+                $this->nRows++;
+            }
             $this->stream = fopen($this->pathToFile, 'r');
         }
 
@@ -30,7 +39,7 @@
             }
         }
 
-        public function getHead(){
+        public function getHeader(){
             $stream = fopen($this->pathToFile, 'r');
             $headers = fgetcsv($stream, 10000, ',');
             $head = array();
@@ -42,4 +51,11 @@
             }
             return $head;
         }
+        public function getTotalRows(){
+            return $this->nRows;
+        }
+        public function getTotalHeaders(){
+            return $this->nHeaders;
+        }
+
     }

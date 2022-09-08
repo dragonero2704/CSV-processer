@@ -1,10 +1,10 @@
 <?php
 class Database { 
     //inserire credenziali database
-    private $hostname = "?";
-    private $username = "?";
-    private $password = "?";
-    private $dbname = "?";
+    private $hostname = "mysql001.brand039.com:33099";
+    private $dbname = "crmbrand039_db_test";
+    private $username = "crmbrand039test";
+    private $password = "5v!IbzkgBp6Su6";
     private $connection = null;
 
     public function getNewConnection(){
@@ -17,10 +17,10 @@ class Database {
 
     function __construct($hostname = null, $username = null, $password = null, $dbname = null)
     {
-        if(!isset($hostname)) $this->hostname = $hostname;
-        if(!isset($username)) $this->username = $username;
-        if(!isset($password)) $this->password = $password;
-        if(!isset($dbname)) $this->dbname = $dbname;
+        if(isset($hostname)) $this->hostname = $hostname;
+        if(isset($username)) $this->username = $username;
+        if(isset($password)) $this->password = $password;
+        if(isset($dbname)) $this->dbname = $dbname;
         $this->connection = new mysqli($hostname, $username, $password, $dbname);
     }
 
@@ -64,6 +64,15 @@ class Database {
 
         return $this->connection->query($sql);
 
+    }
+
+    public function query($query){
+        $ris = $this->connection->query($query);
+        if($ris->num_rows > 0){
+            return $ris;
+        }else{
+            return false;
+        }
     }
 }
 ?>
