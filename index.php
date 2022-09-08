@@ -75,7 +75,7 @@ if (!empty($_FILES['fileupload'])) {
     FROM sys.Tables");
 
     echo $ris;*/
-    $configuration = json_decode(file_get_contents("./configs/SERVIZI_WEB.json"), true);
+    $configuration = json_decode(file_get_contents("./configs/SERVIZI_WEB.json"));
     print_r($configuration);
     $cycles = $configuration->ROWSTEPS;
 
