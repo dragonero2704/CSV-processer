@@ -78,16 +78,30 @@ if (!empty($_FILES['fileupload'])) {
     $configuration = json_decode(file_get_contents("./configs/SERVIZI_WEB.json"));
     print_r($configuration);
     $cycles = $configuration->ROWSTEPS;
-
+    $configtablename = $configuration->tablename;
+    if($configuration->controllo == true){
+        $prechecks = $configuration->checks;
+    }
     //scorro il csv riga per riga
     $headers = $csv->getHeader();
     $row = $csv->getNextRow(); //salto la prima linea che è l'header
+    $counter = 0;
 
     while ($row = $csv->getNextRow()){
+        $counter++;
         //operazione da eseguire per ogni linea
+        $skip = false;
+        foreach($prechecks as $column => $checked_value){
+            if($row[$headers[$column]] == $checked_value) continue;
+            $skip = true;
+        }
 
+        if($skip == true){
+            echo "<p>Linea $counter saltata: non ha passato i controlli. Dominio: ".$row[$headers['DOMINIO']];
+        }
+        
         foreach($cycles as $key => $values){
-
+            $data = array();
             //la $key indica il tipo di servizio
 
             foreach($values as $head => $option){
@@ -95,8 +109,12 @@ if (!empty($_FILES['fileupload'])) {
                 if($options->search == true){
                     //cerca tabella
                     $target = $options->tableToSearch;
+                }else{
+
                 }
             }
+
+            $db->insertInto($configtablename, $data);
         }
     }
 
