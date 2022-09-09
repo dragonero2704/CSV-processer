@@ -1,6 +1,7 @@
 <?php
 require('./db.php');
 require('./csv.php');
+
 // controllare https://csv.thephpleague.com/ per la libreria di processing del csv
 $error = "";
 if (!empty($_FILES['fileupload'])) {
@@ -50,14 +51,39 @@ if (!empty($_FILES['fileupload'])) {
     <p class="subtitle">dragonero2704</p>
 
     <h3 class="mt10 subtitle">Caricare un file CSV</h3>
-    <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="post" enctype="multipart/form-data">
-        <input class="fileinput" type="file" name="fileupload">
-        <input type="submit" value="Invia" name="submit">
-    </form>
-
-    <?php if(isset($error)){ echo "<p class='error'>$error<p>"; } ?>
 
     <?php
+    $db = new Database();
+    
+    if(!$db->isConnected()){
+        echo $db->connerror['code'].":".$db->connerror['message'];
+    }
+    //print_r($db);
+    $ris = $db->query("SELECT * FROM mms_slampdesk_anagrafica");
+    if(!empty($db->error)){
+        echo "Errore nella query";
+    }else{
+        if($ris->num_rows > 0){
+            while($row = $ris->fetch_assoc()){
+                echo "<p>".$row['id']."</p>";
+            }
+        }
+    }
+    
+    
+    //print_r($ris->fetch_assoc());
+    ?>
+
+    <form action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" method="post" enctype="multipart/form-data">
+        <input class="fileinput" type="file" name="fileupload">
+        <input type="submit" value="Invia">
+    </form>
+
+    <?php if(!empty($error)){ echo "<p class='error'>$error<p>"; }?>
+
+    <?php
+    
+
     if(!empty($csv)){
         echo "<div class='tableContainer mt10'><table>";
         foreach ($csv->getRows() as $row) {
@@ -70,34 +96,38 @@ if (!empty($_FILES['fileupload'])) {
         echo "</table></div>";
     }
 
-    $db = new Database();
-    /*$ris = $db->query("SELECT *
-    FROM sys.Tables");
+    
+    //echo "<p>lorem</p>";
 
-    echo $ris;*/
     $configuration = json_decode(file_get_contents("./configs/SERVIZI_WEB.json"));
     print_r($configuration);
     $cycles = $configuration->ROWSTEPS;
     $configtablename = $configuration->tablename;
-    if($configuration->controllo == true){
+    if($configuration->controllo === true){
         $prechecks = $configuration->checks;
     }
     //scorro il csv riga per riga
     $headers = $csv->getHeader();
+    //print_r($headers);
     $row = $csv->getNextRow(); //salto la prima linea che è l'header
     $counter = 0;
 
     while ($row = $csv->getNextRow()){
+        //print_r($row);
         $counter++;
         //operazione da eseguire per ogni linea
         $skip = false;
-        foreach($prechecks as $column => $checked_value){
-            if($row[$headers[$column]] == $checked_value) continue;
-            $skip = true;
+        if($configuration->controllo === true){
+            foreach($prechecks as $column => $checked_value){
+                if(trim($row[$headers[$column]]) === $checked_value) continue;
+                $skip = true;
+                if($skip === true) break;
+            }
         }
 
-        if($skip == true){
-            echo "<p>Linea $counter saltata: non ha passato i controlli. Dominio: ".$row[$headers['DOMINIO']];
+        if($skip === true){
+            echo "<p class='error'>Linea ".($counter+1)." saltata: non ha passato i controlli. Dominio: ".$row[$headers['DOMINIO']]." Anagrafica: ".$row[$headers['NOME CLIENTE']]."</p>";
+            continue;
         }
         
         foreach($cycles as $key => $values){
@@ -106,7 +136,7 @@ if (!empty($_FILES['fileupload'])) {
 
             foreach($values as $head => $option){
                 //$head indica la colonna
-                if($options->search == true){
+                if($options->search === true){
                     //cerca tabella
                     $target = $options->tableToSearch;
                 }else{
@@ -114,7 +144,7 @@ if (!empty($_FILES['fileupload'])) {
                 }
             }
 
-            $db->insertInto($configtablename, $data);
+            //$db->insertInto($configtablename, $data);
         }
     }
 

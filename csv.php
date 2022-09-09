@@ -49,6 +49,7 @@
                 $head[$header] = $counter;
                 $counter += 1;
             }
+            //print_r($head);
             return $head;
         }
         public function getTotalRows(){
