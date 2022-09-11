@@ -21,8 +21,8 @@
             "DNS": {
                 "search": "true",
                 "fieldToInsert": "",
-                "tableToSearch": "nome tabella",
-                "fieldToSearch": ""
+                "tableToSearch": "",
+                "fieldToSearch": "id"
             },
             "DOMINIO PREZZO": {
                 "search": "false",
@@ -41,7 +41,7 @@
             "NOME CLIENTE": {
                 "search": "true",
                 "fieldToInsert": "id_anagrafica",
-                "tableToSearch": "nome tabella",
+                "tableToSearch": "",
                 "fieldToSearch": "id"
             },
             "DOMINIO": {
@@ -67,8 +67,8 @@
             "NOME CLIENTE": {
                 "search": "true",
                 "fieldToInsert": "id_anagrafica",
-                "tableToSearch": "nome tabella",
-                "fieldToSearch": ""
+                "tableToSearch": "",
+                "fieldToSearch": "id"
             },
             "DOMINIO": {
                 "search": "true",
@@ -93,8 +93,8 @@
             "NOME CLIENTE": {
                 "search": "true",
                 "fieldToInsert": "id_anagrafica",
-                "tableToSearch": "nome tabella",
-                "fieldToSearch": ""
+                "tableToSearch": "",
+                "fieldToSearch": "id"
             },
             "DOMINIO": {
                 "search": "true",
@@ -119,8 +119,8 @@
             "NOME CLIENTE": {
                 "search": "true",
                 "fieldToInsert": "id_anagrafica",
-                "tableToSearch": "nome tabella",
-                "fieldToSearch": ""
+                "tableToSearch": "",
+                "fieldToSearch": "id"
             },
             "DOMINIO": {
                 "search": "true",
@@ -145,8 +145,8 @@
             "NOME CLIENTE": {
                 "search": "true",
                 "fieldToInsert": "id_anagrafica",
-                "tableToSearch": "nome tabella",
-                "fieldToSearch": ""
+                "tableToSearch": "",
+                "fieldToSearch": "id"
             },
             "DOMINIO": {
                 "search": "true",
@@ -163,7 +163,7 @@
             "NOME CLIENTE": {
                 "search": "true",
                 "fieldToInsert": "id_anagrafica",
-                "tableToSearch": "nome tabella",
+                "tableToSearch": "",
                 "fieldToSearch": "id"
             },
             "DOMINIO": {
@@ -189,7 +189,7 @@
             "NOME CLIENTE": {
                 "search": "true",
                 "fieldToInsert": "id_anagrafica",
-                "tableToSearch": "nome tabella",
+                "tableToSearch": "",
                 "fieldToSearch": "id"
             },
             "DOMINIO": {
@@ -211,8 +211,8 @@
             "NOME CLIENTE": {
                 "search": "true",
                 "fieldToInsert": "id_anagrafica",
-                "tableToSearch": "nome tabella",
-                "fieldToSearch": ""
+                "tableToSearch": "",
+                "fieldToSearch": "id"
             },
             "DOMINIO": {
                 "search": "true",

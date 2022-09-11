@@ -57,18 +57,20 @@ if (!empty($_FILES['fileupload'])) {
 
     if (!$db->isConnected()) {
         echo $db->connerror['code'] . ":" . $db->connerror['message'];
-    }
-    //print_r($db);
-    $ris = $db->query("SELECT * FROM mms_slampdesk_anagrafica");
-    if (!empty($db->error)) {
-        echo "Errore nella query";
     } else {
-        if ($ris->num_rows > 0) {
-            while ($row = $ris->fetch_assoc()) {
-                echo "<p>" . $row['id'] . "</p>";
+        $ris = $db->query("SELECT * FROM mms_slampdesk_anagrafica");
+        if (!empty($db->error)) {
+            echo "Errore nella query";
+        } else {
+            if ($ris->num_rows > 0) {
+                while ($row = $ris->fetch_assoc()) {
+                    echo "<p>" . $row['id'] . "</p>";
+                }
             }
         }
     }
+    //print_r($db);
+
 
 
     //print_r($ris->fetch_assoc());
@@ -120,15 +122,12 @@ if (!empty($_FILES['fileupload'])) {
             $skip = false;
             if ($configuration->controllo === true) {
                 foreach ($prechecks as $column => $checked_value) {
-                    if (trim($row[$headers[$column]]) === $checked_value) continue;
-                    $skip = true;
+                    if (trim($row[$headers[$column]]) !== $checked_value) {
+                        echo "<p class='error'>Linea " . ($counter + 1) . " saltata: non ha passato i controlli. Dominio: " . $row[$headers[$column]] . " Anagrafica: " . $row[$headers['NOME CLIENTE']] . "</p>";
+                        $skip = true;
+                    }
                     if ($skip === true) break;
                 }
-            }
-
-            if ($skip === true) {
-                echo "<p class='error'>Linea " . ($counter + 1) . " saltata: non ha passato i controlli. Dominio: " . $row[$headers['DOMINIO']] . " Anagrafica: " . $row[$headers['NOME CLIENTE']] . "</p>";
-                continue;
             }
 
             foreach ($cycles as $key => $values) {
@@ -141,6 +140,7 @@ if (!empty($_FILES['fileupload'])) {
                         //cerca tabella
                         $target = $options->tableToSearch;
                     } else {
+                        //settare l'oggetto $data
                     }
                 }
 

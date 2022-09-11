@@ -28,7 +28,10 @@ class Database {
 
     function __destruct()
     {
-        $this->connection->close();
+        if(empty($this->connerror)){
+            $this->connection->close();
+        }
+        
     }
 
     public function getNewConnection(){
