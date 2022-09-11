@@ -54,23 +54,23 @@ if (!empty($_FILES['fileupload'])) {
 
     <?php
     $db = new Database();
-    
-    if(!$db->isConnected()){
-        echo $db->connerror['code'].":".$db->connerror['message'];
+
+    if (!$db->isConnected()) {
+        echo $db->connerror['code'] . ":" . $db->connerror['message'];
     }
     //print_r($db);
     $ris = $db->query("SELECT * FROM mms_slampdesk_anagrafica");
-    if(!empty($db->error)){
+    if (!empty($db->error)) {
         echo "Errore nella query";
-    }else{
-        if($ris->num_rows > 0){
-            while($row = $ris->fetch_assoc()){
-                echo "<p>".$row['id']."</p>";
+    } else {
+        if ($ris->num_rows > 0) {
+            while ($row = $ris->fetch_assoc()) {
+                echo "<p>" . $row['id'] . "</p>";
             }
         }
     }
-    
-    
+
+
     //print_r($ris->fetch_assoc());
     ?>
 
@@ -79,12 +79,14 @@ if (!empty($_FILES['fileupload'])) {
         <input type="submit" value="Invia">
     </form>
 
-    <?php if(!empty($error)){ echo "<p class='error'>$error<p>"; }?>
+    <?php if (!empty($error)) {
+        echo "<p class='error'>$error<p>";
+    } ?>
 
     <?php
-    
 
-    if(!empty($csv)){
+
+    if (!empty($csv)) {
         echo "<div class='tableContainer mt10'><table>";
         foreach ($csv->getRows() as $row) {
             echo "<tr>";
@@ -95,62 +97,57 @@ if (!empty($_FILES['fileupload'])) {
         }
         echo "</table></div>";
 
-    
-    //echo "<p>lorem</p>";
 
-    $configuration = json_decode(file_get_contents("./configs/SERVIZI_WEB.json"));
-    print_r($configuration);
-    $cycles = $configuration->ROWSTEPS;
-    $configtablename = $configuration->tablename;
-    if($configuration->controllo === true){
-        $prechecks = $configuration->checks;
-    }
-    //scorro il csv riga per riga
-    $headers = $csv->getHeader();
-    //print_r($headers);
-    $row = $csv->getNextRow(); //salto la prima linea che è l'header
-    $counter = 0;
+        //echo "<p>lorem</p>";
 
-    while ($row = $csv->getNextRow()){
-        //print_r($row);
-        $counter++;
-        //operazione da eseguire per ogni linea
-        $skip = false;
-        if($configuration->controllo === true){
-            foreach($prechecks as $column => $checked_value){
-                if(trim($row[$headers[$column]]) === $checked_value) continue;
-                $skip = true;
-                if($skip === true) break;
-            }
+        $configuration = json_decode(file_get_contents("./configs/SERVIZI_WEB.json"));
+        print_r($configuration);
+        $cycles = $configuration->ROWSTEPS;
+        $configtablename = $configuration->tablename;
+        if ($configuration->controllo === true) {
+            $prechecks = $configuration->checks;
         }
+        //scorro il csv riga per riga
+        $headers = $csv->getHeader();
+        //print_r($headers);
+        $row = $csv->getNextRow(); //salto la prima linea che è l'header
+        $counter = 0;
 
-        if($skip === true){
-            echo "<p class='error'>Linea ".($counter+1)." saltata: non ha passato i controlli. Dominio: ".$row[$headers['DOMINIO']]." Anagrafica: ".$row[$headers['NOME CLIENTE']]."</p>";
-            continue;
-        }
-        
-        foreach($cycles as $key => $values){
-            $data = array();
-            //la $key indica il tipo di servizio
-
-            foreach($values as $head => $option){
-                //$head indica la colonna
-                if($options->search === true){
-                    //cerca tabella
-                    $target = $options->tableToSearch;
-                }else{
-
+        while ($row = $csv->getNextRow()) {
+            //print_r($row);
+            $counter++;
+            //operazione da eseguire per ogni linea
+            $skip = false;
+            if ($configuration->controllo === true) {
+                foreach ($prechecks as $column => $checked_value) {
+                    if (trim($row[$headers[$column]]) === $checked_value) continue;
+                    $skip = true;
+                    if ($skip === true) break;
                 }
             }
 
-            //$db->insertInto($configtablename, $data);
+            if ($skip === true) {
+                echo "<p class='error'>Linea " . ($counter + 1) . " saltata: non ha passato i controlli. Dominio: " . $row[$headers['DOMINIO']] . " Anagrafica: " . $row[$headers['NOME CLIENTE']] . "</p>";
+                continue;
+            }
+
+            foreach ($cycles as $key => $values) {
+                $data = array();
+                //la $key indica il tipo di servizio
+
+                foreach ($values as $head => $option) {
+                    //$head indica la colonna
+                    if ($options->search === true) {
+                        //cerca tabella
+                        $target = $options->tableToSearch;
+                    } else {
+                    }
+                }
+
+                //$db->insertInto($configtablename, $data);
+            }
         }
     }
-
-
-
-
-
     ?>
 
 </body>
