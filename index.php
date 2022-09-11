@@ -26,9 +26,9 @@ if (!empty($_FILES['fileupload'])) {
     //upload andato a buon fine
     //controllo che il file sia effetivamente un csv
     $filename = $_FILES['fileupload']['name'];
-    if(array_reverse(explode('.', $filename))[0] === 'csv'){
+    if (array_reverse(explode('.', $filename))[0] === 'csv') {
         $csv = new CSV($_FILES['fileupload']);
-    }else{
+    } else {
         $error = "Not a CSV file";
     }
 }
@@ -55,70 +55,74 @@ if (!empty($_FILES['fileupload'])) {
         <input type="submit" value="Invia" name="submit">
     </form>
 
-    <?php if(isset($error)){ echo "<p class='error'>$error<p>"; } ?>
+    <?php if (isset($error)) {
+        echo "<p class='error'>$error<p>";
+    } ?>
 
     <?php
-    if(!empty($csv)){
+    if (!empty($csv)) {
         echo "<div class='tableContainer mt10'><table>";
         foreach ($csv->getRows() as $row) {
             echo "<tr>";
-            foreach($row as $element){
-                echo"<td>$element</td>";
+            foreach ($row as $element) {
+                echo "<td>$element</td>";
             }
             echo "</tr>";
         }
         echo "</table></div>";
-    }
 
-    $db = new Database();
-    /*$ris = $db->query("SELECT *
+        $db = new Database();
+        /*$ris = $db->query("SELECT *
     FROM sys.Tables");
 
     echo $ris;*/
-    $configuration = json_decode(file_get_contents("./configs/SERVIZI_WEB.json"));
-    print_r($configuration);
-    $cycles = $configuration->ROWSTEPS;
-    $configtablename = $configuration->tablename;
-    if($configuration->controllo == true){
-        $prechecks = $configuration->checks;
-    }
-    //scorro il csv riga per riga
-    $headers = $csv->getHeader();
-    $row = $csv->getNextRow(); //salto la prima linea che è l'header
-    $counter = 0;
-
-    while ($row = $csv->getNextRow()){
-        $counter++;
-        //operazione da eseguire per ogni linea
-        $skip = false;
-        foreach($prechecks as $column => $checked_value){
-            if($row[$headers[$column]] == $checked_value) continue;
-            $skip = true;
+        $configuration = json_decode(file_get_contents("./configs/SERVIZI_WEB.json"));
+        // print_r($configuration);
+        $cycles = $configuration->ROWSTEPS;
+        $configtablename = $configuration->tablename;
+        if ($configuration->controllo == true) {
+            $prechecks = $configuration->checks;
         }
+        //scorro il csv riga per riga
+        $headers = $csv->getHeader();
+        $row = $csv->getNextRow(); //salto la prima linea che è l'header
+        $counter = 0;
 
-        if($skip == true){
-            echo "<p>Linea $counter saltata: non ha passato i controlli. Dominio: ".$row[$headers['DOMINIO']];
-        }
-        
-        foreach($cycles as $key => $values){
-            $data = array();
-            //la $key indica il tipo di servizio
-
-            foreach($values as $head => $option){
-                //$head indica la colonna
-                if($options->search == true){
-                    //cerca tabella
-                    $target = $options->tableToSearch;
-                }else{
-
-                }
+        while ($row = $csv->getNextRow()) {
+            $counter++;
+            //operazione da eseguire per ogni linea
+            $skip = false;
+            foreach ($prechecks as $column => $checked_value) {
+                if ($row[$headers[$column]] == $checked_value) continue;
+                $skip = true;
             }
 
-            $db->insertInto($configtablename, $data);
+            if ($skip == true) {
+                echo "<p>Linea $counter saltata: non ha passato i controlli. Dominio: " . $row[$headers['DOMINIO']];
+            }
+
+            foreach ($cycles as $key => $values) {
+                $data = array();
+                //la $key indica il tipo di servizio
+
+                foreach ($values as $head => $options) {
+                    //$head indica la colonna
+                    if ($options->search == true) {
+                        //cerca tabella
+                        // print_r($head);
+                        if(!empty($options->tableToSearch)) $target = $options->tableToSearch;
+                    } else {
+                    }
+                }
+
+                //$db->insertInto($configtablename, $data);
+            }
         }
     }
 
-    
+
+
+
 
     ?>
 
