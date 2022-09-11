@@ -1,11 +1,13 @@
 <?php
 class Database { 
     //inserire credenziali database
-    private $hostname = "mysql001.brand039.com";
+    private $hostname = "192.168.80.110:3306";
     private $dbname = "crmbrand039_db_test";
     private $username = "crmbrand039test";
     private $password = "5v!IbzkgBp6Su6";
     private $connection = null;
+    public $connerror = array();
+    public $error = array();
 
     function __construct($hostname = null, $username = null, $password = null, $dbname = null)
     {
@@ -13,7 +15,15 @@ class Database {
         if(isset($username)) $this->username = $username;
         if(isset($password)) $this->password = $password;
         if(isset($dbname)) $this->dbname = $dbname;
-        $this->connection = new mysqli($hostname, $username, $password, $dbname);
+        $this->connection = new mysqli($this->hostname, $this->username, $this->password, $this->dbname);
+        if(!empty($this->connection->connect_errno)){
+            $this->connerror['code'] = $this->connection->connect_errno;
+            $this->connerror['message'] = $this->connection->connect_error;
+        }
+    }
+
+    public function isConnected(){
+        return empty($this->connerror);
     }
 
     function __destruct()
@@ -103,12 +113,14 @@ class Database {
     }
 
     public function query($query){
+        $this->error = array();
         $ris = $this->connection->query($query);
-        if($ris->num_rows > 0){
+        if(!empty($this->connection->errno)){
+            $this->connection->errno = $this->error['code'];
+            $this->connection->error = $this->error['message'];
             return $ris;
-        }else{
-            return false;
         }
+        return $ris;
     }
 }
 ?>

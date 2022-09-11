@@ -1,6 +1,6 @@
 {
-    "tablename": "servizi attivi",
-    "controllo": "true",
+    "tablename": "mms_slampdesk_anagrafica_servizi_attivi",
+    "controllo": "false",
     "checks": {
         "F": "Fatturato 2022"
     },
@@ -8,18 +8,21 @@
         "DOMINIO": {
             "NOME CLIENTE": {
                 "search": "true",
-                "fieldToInsert": "",
-                "tableToSearch": "nome tabella"
+                "fieldToInsert": "id_anagrafica",
+                "tableToSearch": "",
+                "fieldToSearch": "id"
             },
             "DOMINIO": {
                 "search": "true",
-                "fieldToInsert": "",
-                "tableToSearch": "nome tabella"
+                "fieldToInsert": "id_dominio",
+                "tableToSearch": "mms_slampdesk_domini",
+                "fieldToSearch": "id"
             },
             "DNS": {
                 "search": "true",
                 "fieldToInsert": "",
-                "tableToSearch": "nome tabella"
+                "tableToSearch": "nome tabella",
+                "fieldToSearch": ""
             },
             "DOMINIO PREZZO": {
                 "search": "false",
@@ -37,13 +40,15 @@
         "HOSTING": {
             "NOME CLIENTE": {
                 "search": "true",
-                "fieldToInsert": "",
-                "tableToSearch": "nome tabella"
+                "fieldToInsert": "id_anagrafica",
+                "tableToSearch": "nome tabella",
+                "fieldToSearch": "id"
             },
             "DOMINIO": {
                 "search": "true",
-                "fieldToInsert": "",
-                "tableToSearch": "nome tabella"
+                "fieldToInsert": "id_dominio",
+                "tableToSearch": "mms_slampdesk_domini",
+                "fieldToSearch": "id"
             },
             "HOSTING": {
                 "search": "false",
@@ -61,13 +66,15 @@
         "POSTA": {
             "NOME CLIENTE": {
                 "search": "true",
-                "fieldToInsert": "",
-                "tableToSearch": "nome tabella"
+                "fieldToInsert": "id_anagrafica",
+                "tableToSearch": "nome tabella",
+                "fieldToSearch": ""
             },
             "DOMINIO": {
                 "search": "true",
-                "fieldToInsert": "",
-                "tableToSearch": "nome tabella"
+                "fieldToInsert": "id_dominio",
+                "tableToSearch": "mms_slampdesk_domini",
+                "fieldToSearch": "id"
             },
             "POSTA": {
                 "search": "false",
@@ -85,13 +92,15 @@
         "SMTP": {
             "NOME CLIENTE": {
                 "search": "true",
-                "fieldToInsert": "",
-                "tableToSearch": "nome tabella"
+                "fieldToInsert": "id_anagrafica",
+                "tableToSearch": "nome tabella",
+                "fieldToSearch": ""
             },
             "DOMINIO": {
                 "search": "true",
-                "fieldToInsert": "",
-                "tableToSearch": "nome tabella"
+                "fieldToInsert": "id_dominio",
+                "tableToSearch": "mms_slampdesk_domini",
+                "fieldToSearch": "id"
             },
             "SMTP": {
                 "search": "false",
@@ -109,13 +118,15 @@
         "ANTIVIRUS": {
             "NOME CLIENTE": {
                 "search": "true",
-                "fieldToInsert": "",
-                "tableToSearch": "nome tabella"
+                "fieldToInsert": "id_anagrafica",
+                "tableToSearch": "nome tabella",
+                "fieldToSearch": ""
             },
             "DOMINIO": {
                 "search": "true",
-                "fieldToInsert": "",
-                "tableToSearch": "nome tabella"
+                "fieldToInsert": "id_dominio",
+                "tableToSearch": "mms_slampdesk_domini",
+                "fieldToSearch": "id"
             },
             "ANTI": {
                 "search": "false",
@@ -133,13 +144,15 @@
         "SSL": {
             "NOME CLIENTE": {
                 "search": "true",
-                "fieldToInsert": "",
-                "tableToSearch": "nome tabella"
+                "fieldToInsert": "id_anagrafica",
+                "tableToSearch": "nome tabella",
+                "fieldToSearch": ""
             },
             "DOMINIO": {
                 "search": "true",
-                "fieldToInsert": "",
-                "tableToSearch": "nome tabella"
+                "fieldToInsert": "id_dominio",
+                "tableToSearch": "mms_slampdesk_domini",
+                "fieldToSearch": "id"
             },
             "SSL": {
                 "search": "false",
@@ -149,13 +162,15 @@
         "PEC": {
             "NOME CLIENTE": {
                 "search": "true",
-                "fieldToInsert": "",
-                "tableToSearch": "nome tabella"
+                "fieldToInsert": "id_anagrafica",
+                "tableToSearch": "nome tabella",
+                "fieldToSearch": "id"
             },
             "DOMINIO": {
                 "search": "true",
-                "fieldToInsert": "",
-                "tableToSearch": "nome tabella"
+                "fieldToInsert": "id_dominio",
+                "tableToSearch": "mms_slampdesk_domini",
+                "fieldToSearch": "id"
             },
             "PEC": {
                 "search": "false",
@@ -173,13 +188,15 @@
         "COOKIEBOT": {
             "NOME CLIENTE": {
                 "search": "true",
-                "fieldToInsert": "",
-                "tableToSearch": "nome tabella"
+                "fieldToInsert": "id_anagrafica",
+                "tableToSearch": "nome tabella",
+                "fieldToSearch": "id"
             },
             "DOMINIO": {
                 "search": "true",
-                "fieldToInsert": "",
-                "tableToSearch": "nome tabella"
+                "fieldToInsert": "id_dominio",
+                "tableToSearch": "mms_slampdesk_domini",
+                "fieldToSearch": "id"
             },
             "COOKIEBOT": {
                 "search": "false",
@@ -193,13 +210,15 @@
         "AUT": {
             "NOME CLIENTE": {
                 "search": "true",
-                "fieldToInsert": "",
-                "tableToSearch": "nome tabella"
+                "fieldToInsert": "id_anagrafica",
+                "tableToSearch": "nome tabella",
+                "fieldToSearch": ""
             },
             "DOMINIO": {
                 "search": "true",
-                "fieldToInsert": "",
-                "tableToSearch": "nome tabella"
+                "fieldToInsert": "id_dominio",
+                "tableToSearch": "mms_slampdesk_domini",
+                "fieldToSearch": "id"
             },
             "AUT": {
                 "search": "false",
