@@ -4,77 +4,102 @@
     "checks": {
         "F": "Fatturato 2022"
     },
+    "dataPreset": {
+        "enable": 1,
+        "stato": 1,
+        "id_cdc": "1"
+    },
     "ROWSTEPS": {
         "DOMINIO": {
             "NOME CLIENTE": {
                 "search": "true",
                 "fieldToInsert": "id_anagrafica",
-                "tableToSearch": "",
-                "fieldToSearch": "id"
+                "tableToSearch": "mms_slampdesk_anagrafica",
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce"
             },
             "DOMINIO": {
                 "search": "true",
                 "fieldToInsert": "id_dominio",
                 "tableToSearch": "mms_slampdesk_domini",
-                "fieldToSearch": "id"
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce"
             },
             "DNS": {
-                "search": "true",
-                "fieldToInsert": "",
-                "tableToSearch": "",
-                "fieldToSearch": "id"
+                "readFromCsv": "false",
+                "fieldToInsert": "dns",
+                "values": {
+                    "Altro": "cliente",
+                    "Register": "B039 Register",
+                    "Promo": "Promo",
+                    "Siteground": "Siteground"
+                }
             },
             "DOMINIO PREZZO": {
                 "search": "false",
-                "fieldToInsert": ""
+                "fieldToInsert": "prezzo"
             },
             "DOMINIO COSTO": {
                 "search": "false",
-                "fieldToInsert": ""
+                "fieldToInsert": "costo"
             },
             "SCADENZA DOMINIO": {
                 "search": "false",
-                "fieldToInsert": ""
+                "fieldToInsert": "scadenza"
+            },
+            "TIPOLOGIA": {
+                "search": "true",
+                "fieldToInsert": "id_tipologia",
+                "tableToSearch": "mms_slampdesk_tipologia",
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce"
+            },
+            "LISTINO": {
+                "readFromCsv": "false"
             }
         },
         "HOSTING": {
             "NOME CLIENTE": {
                 "search": "true",
                 "fieldToInsert": "id_anagrafica",
-                "tableToSearch": "",
-                "fieldToSearch": "id"
+                "tableToSearch": "mms_slampdesk_anagrafica",
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce"
             },
             "DOMINIO": {
                 "search": "true",
                 "fieldToInsert": "id_dominio",
                 "tableToSearch": "mms_slampdesk_domini",
-                "fieldToSearch": "id"
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce"
             },
             "HOSTING": {
                 "search": "false",
-                "fieldToInsert": ""
+                "fieldToInsert": "prezzo"
             },
             "HOSTING COSTO": {
                 "search": "false",
-                "fieldToInsert": ""
+                "fieldToInsert": "costo"
             },
             "SCADENZA HOSTING": {
                 "search": "false",
-                "fieldToInsert": ""
+                "fieldToInsert": "scadenza"
             }
         },
         "POSTA": {
             "NOME CLIENTE": {
                 "search": "true",
                 "fieldToInsert": "id_anagrafica",
-                "tableToSearch": "",
-                "fieldToSearch": "id"
+                "tableToSearch": "mms_slampdesk_anagrafica",
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce"
             },
             "DOMINIO": {
                 "search": "true",
                 "fieldToInsert": "id_dominio",
                 "tableToSearch": "mms_slampdesk_domini",
-                "fieldToSearch": "id"
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce"
             },
             "POSTA": {
                 "search": "false",
@@ -93,14 +118,16 @@
             "NOME CLIENTE": {
                 "search": "true",
                 "fieldToInsert": "id_anagrafica",
-                "tableToSearch": "",
-                "fieldToSearch": "id"
+                "tableToSearch": "mms_slampdesk_anagrafica",
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce"
             },
             "DOMINIO": {
                 "search": "true",
                 "fieldToInsert": "id_dominio",
                 "tableToSearch": "mms_slampdesk_domini",
-                "fieldToSearch": "id"
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce"
             },
             "SMTP": {
                 "search": "false",
@@ -119,14 +146,16 @@
             "NOME CLIENTE": {
                 "search": "true",
                 "fieldToInsert": "id_anagrafica",
-                "tableToSearch": "",
-                "fieldToSearch": "id"
+                "tableToSearch": "mms_slampdesk_anagrafica",
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce"
             },
             "DOMINIO": {
                 "search": "true",
                 "fieldToInsert": "id_dominio",
                 "tableToSearch": "mms_slampdesk_domini",
-                "fieldToSearch": "id"
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce"
             },
             "ANTI": {
                 "search": "false",
@@ -145,14 +174,16 @@
             "NOME CLIENTE": {
                 "search": "true",
                 "fieldToInsert": "id_anagrafica",
-                "tableToSearch": "",
-                "fieldToSearch": "id"
+                "tableToSearch": "mms_slampdesk_anagrafica",
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce"
             },
             "DOMINIO": {
                 "search": "true",
                 "fieldToInsert": "id_dominio",
                 "tableToSearch": "mms_slampdesk_domini",
-                "fieldToSearch": "id"
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce"
             },
             "SSL": {
                 "search": "false",
@@ -163,14 +194,16 @@
             "NOME CLIENTE": {
                 "search": "true",
                 "fieldToInsert": "id_anagrafica",
-                "tableToSearch": "",
-                "fieldToSearch": "id"
+                "tableToSearch": "mms_slampdesk_anagrafica",
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce"
             },
             "DOMINIO": {
                 "search": "true",
                 "fieldToInsert": "id_dominio",
                 "tableToSearch": "mms_slampdesk_domini",
-                "fieldToSearch": "id"
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce"
             },
             "PEC": {
                 "search": "false",
@@ -189,14 +222,16 @@
             "NOME CLIENTE": {
                 "search": "true",
                 "fieldToInsert": "id_anagrafica",
-                "tableToSearch": "",
-                "fieldToSearch": "id"
+                "tableToSearch": "mms_slampdesk_anagrafica",
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce"
             },
             "DOMINIO": {
                 "search": "true",
                 "fieldToInsert": "id_dominio",
                 "tableToSearch": "mms_slampdesk_domini",
-                "fieldToSearch": "id"
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce"
             },
             "COOKIEBOT": {
                 "search": "false",
@@ -211,20 +246,21 @@
             "NOME CLIENTE": {
                 "search": "true",
                 "fieldToInsert": "id_anagrafica",
-                "tableToSearch": "",
-                "fieldToSearch": "id"
+                "tableToSearch": "mms_slampdesk_anagrafica",
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce"
             },
             "DOMINIO": {
                 "search": "true",
                 "fieldToInsert": "id_dominio",
                 "tableToSearch": "mms_slampdesk_domini",
-                "fieldToSearch": "id"
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce"
             },
             "AUT": {
                 "search": "false",
                 "fieldToInsert": ""
             }
         }
-
     }
 }

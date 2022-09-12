@@ -117,10 +117,17 @@ class Database {
 
     public function query($query){
         $this->error = array();
-        $ris = $this->connection->query($query);
+        try {
+            //code...
+            $ris = $this->connection->query($query);
+        } catch (\Throwable $th) {
+            //throw $th;
+            echo $th;
+        }
+        
         if(!empty($this->connection->errno)){
-            $this->connection->errno = $this->error['code'];
-            $this->connection->error = $this->error['message'];
+            $this->error['code'] = $this->connection->errno;
+            $this->error['message'] = $this->connection->error;
             return $ris;
         }
         return $ris;
