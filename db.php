@@ -42,9 +42,6 @@ class Database {
         return $this->connection;
     }
 
-    
-
-    
     public function selectAllEnabled($table, $fieldName = "enabled"){
         // $conn = $this->getConnection();
         $sql = "SELECT * 
@@ -64,11 +61,12 @@ class Database {
     *$data deve essere nella forma colonna=>valore
     */
     public function insertInto($table, $data){
+        $this->error = array();
         if(!is_array($data)){
             return false;
         }
 
-        if($this->recordExists($table, $data)){
+        if($this->recordExists($table, $data) === true){
             return false;
         }
 
@@ -79,25 +77,33 @@ class Database {
 
         foreach($data as $key => $value){
             $sql = $sql.$key.', ';
-            $value = str_replace($value, '€', '');
-            if(is_int($value) || is_float($value)){
+            $value = str_replace('€', '', $value);
+            $value = addslashes($value);
+            if(is_numeric($value)){
                 $values = $values.$value.', ';
             }else{
-                $values = $values.'"'.$value.'",';
+                $values = $values.'"'.$value.'", ';
             }
             
         }
         //rimozione dell'ultima virgola
-        $sql = substr($sql, 0, strlen($sql)-1);
-        $values = substr($values, 0, strlen($values)-1);
+        $sql = substr($sql, 0, strlen($sql)-2);
+        $values = substr($values, 0, strlen($values)-2);
 
-        $sql = $sql.')\n'.$values.')';
-
-        return $this->connection->query($sql);
+        $sql = $sql.') '.$values.')';
+        echo "query insertInto: $sql";
+        $ris = $this->connection->query($sql);
+        if(!empty($this->connection->errno)){
+            $this->error['code'] = $this->connection->errno;
+            $this->error['message'] = $this->connection->error;
+            return $ris;
+        }
+        return $ris;
 
     }
 
     public function recordExists($table, $data){
+        $this->error = array();
         $sql = "
         SELECT *
         FROM $table 
@@ -106,13 +112,30 @@ class Database {
         $conditions = array();
 
         foreach($data as $key => $value){
-            $conditions = array_push($conditions, "$key = $value");
+            $value = addslashes($value);
+            //echo "<p class='seeme'>$value</p>";
+            if(is_numeric($value)){
+                array_push($conditions, "$key = $value");
+            }else{
+                array_push($conditions, "$key = '$value'");
+            }
         }
+        echo "<br><br>";
+        var_dump($conditions);
+        echo "<br><br>";
 
         $conditions = join(" AND ", $conditions);
         $sql = $sql.$conditions;
 
-        return $this->connection->query($sql);
+        $ris = $this->connection->query($sql);
+        
+        if(!empty($this->connection->errno)){
+            $this->error['code'] = $this->connection->errno;
+            $this->error['message'] = $this->connection->error;
+            return $ris;
+        }
+
+        return $ris->n_rows !==0;
     }
 
     public function query($query){

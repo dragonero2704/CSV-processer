@@ -86,10 +86,19 @@ if (!empty($_FILES['fileupload'])) {
     } ?>
 
     <?php
-
+    $listino = array();
+    $listino["HOSTING"] = array(
+        140 => "Hosting_prof",
+        "140" => "Hosting_prof",
+        90 => "Hosting basic",
+        "90" => "Hosting basic",
+    );
+    $listino["SMTP"] = array("15" => "SMTP%1000", 15 => "SMTP%1000");
+    $listino["POSTA"] = array("25" => "Posta%5",25 => "Posta%5","19" => "Posta%3",19 => "Posta%3");
+    //$listino["DOMINIO"] = array("50" => "gestione%.it", 50 => "gestione%.it");
 
     if (!empty($csv)) {
-        echo "<div class='tableContainer mt10'><table>";
+        /*echo "<div class='tableContainer mt10'><table>";
         foreach ($csv->getRows() as $row) {
             echo "<tr>";
             foreach ($row as $element) {
@@ -97,7 +106,7 @@ if (!empty($_FILES['fileupload'])) {
             }
             echo "</tr>";
         }
-        echo "</table></div>";
+        echo "</table></div>";*/
 
 
         //echo "<p>lorem</p>";
@@ -107,7 +116,7 @@ if (!empty($_FILES['fileupload'])) {
         echo "<br>";
         //var_dump(file_get_contents("./configs/SERVIZI_WEB.json"));
         //$json = fopen( "./configs/SERVIZI_WEB.json", 'r');
-        
+
         //var_dump($json);
         $json = '{
             "tablename": "mms_slampdesk_anagrafica_servizi_attivi",
@@ -161,12 +170,18 @@ if (!empty($_FILES['fileupload'])) {
                     "TIPOLOGIA": {
                         "search": "true",
                         "fieldToInsert": "id_tipologia",
-                        "tableToSearch": "mms_slampdesk_tipologia",
+                        "tableToSearch": "mms_slampdesk_opzioni",
                         "fieldToSearch": "id",
-                        "fieldToCompare": "voce"
+                        "fieldToCompare": "valore",
+                        "valueToCompare": "Gest"
                     },
                     "LISTINO": {
-                        "readFromCsv": "false"
+                        "search": true,
+                        "fieldToInsert": "id_listino",
+                        "tableToSearch": "mms_slampdesk_listino",
+                        "fieldToSearch": "id",
+                        "fieldToCompare": "voce",
+                        "valueToCompare": "mantenimento%it"
                     }
                 },
                 "HOSTING": {
@@ -195,6 +210,22 @@ if (!empty($_FILES['fileupload'])) {
                     "SCADENZA HOSTING": {
                         "search": "false",
                         "fieldToInsert": "scadenza"
+                    },
+                    "TIPOLOGIA": {
+                        "search": "true",
+                        "fieldToInsert": "id_tipologia",
+                        "tableToSearch": "mms_slampdesk_opzioni",
+                        "fieldToSearch": "id",
+                        "fieldToCompare": "valore",
+                        "valueToCompare": "Hosting"
+                    },
+                    "LISTINO": {
+                        "search": true,
+                        "fieldToInsert": "id_listino",
+                        "tableToSearch": "mms_slampdesk_listino",
+                        "fieldToSearch": "id",
+                        "fieldToCompare": "voce",
+                        "valueToCompare": "GetFromPrezzo"
                     }
                 },
                 "POSTA": {
@@ -214,15 +245,31 @@ if (!empty($_FILES['fileupload'])) {
                     },
                     "POSTA": {
                         "search": "false",
-                        "fieldToInsert": ""
+                        "fieldToInsert": "prezzo"
                     },
                     "POSTA COSTO": {
                         "search": "false",
-                        "fieldToInsert": ""
+                        "fieldToInsert": "costo"
                     },
                     "SCADENZA POSTA": {
                         "search": "false",
-                        "fieldToInsert": ""
+                        "fieldToInsert": "scadenza"
+                    },
+                    "TIPOLOGIA": {
+                        "search": "true",
+                        "fieldToInsert": "id_tipologia",
+                        "tableToSearch": "mms_slampdesk_opzioni",
+                        "fieldToSearch": "id",
+                        "fieldToCompare": "valore",
+                        "valueToCompare": "Posta"
+                    },
+                    "LISTINO": {
+                        "search": true,
+                        "fieldToInsert": "id_listino",
+                        "tableToSearch": "mms_slampdesk_listino",
+                        "fieldToSearch": "id",
+                        "fieldToCompare": "voce",
+                        "valueToCompare": "GetFromPrezzo"
                     }
                 },
                 "SMTP": {
@@ -242,7 +289,7 @@ if (!empty($_FILES['fileupload'])) {
                     },
                     "SMTP": {
                         "search": "false",
-                        "fieldToInsert": ""
+                        "fieldToInsert": "prezzo"
                     },
                     "SMATP COSTO": {
                         "search": "false",
@@ -250,7 +297,23 @@ if (!empty($_FILES['fileupload'])) {
                     },
                     "SCADENZA SMTP": {
                         "search": "false",
-                        "fieldToInsert": ""
+                        "fieldToInsert": "scadenza"
+                    },
+                    "TIPOLOGIA": {
+                        "search": "true",
+                        "fieldToInsert": "id_tipologia",
+                        "tableToSearch": "mms_slampdesk_opzioni",
+                        "fieldToSearch": "id",
+                        "fieldToCompare": "valore",
+                        "valueToCompare": "SMTP"
+                    },
+                    "LISTINO": {
+                        "search": true,
+                        "fieldToInsert": "id_listino",
+                        "tableToSearch": "mms_slampdesk_listino",
+                        "fieldToSearch": "id",
+                        "fieldToCompare": "voce",
+                        "valueToCompare": "GetFromPrezzo"
                     }
                 },
                 "ANTIVIRUS": {
@@ -270,15 +333,31 @@ if (!empty($_FILES['fileupload'])) {
                     },
                     "ANTI": {
                         "search": "false",
-                        "fieldToInsert": ""
+                        "fieldToInsert": "prezzo"
                     },
                     "ANTI COSTO": {
                         "search": "false",
-                        "fieldToInsert": ""
+                        "fieldToInsert": "costo"
                     },
                     "SCANDEZA ANTISPAM": {
                         "search": "false",
-                        "fieldToInsert": ""
+                        "fieldToInsert": "scadenza"
+                    },
+                    "TIPOLOGIA": {
+                        "search": "true",
+                        "fieldToInsert": "id_tipologia",
+                        "tableToSearch": "mms_slampdesk_opzioni",
+                        "fieldToSearch": "id",
+                        "fieldToCompare": "valore",
+                        "valueToCompare": "Anti"
+                    },
+                    "LISTINO": {
+                        "search": true,
+                        "fieldToInsert": "id_listino",
+                        "tableToSearch": "mms_slampdesk_listino",
+                        "fieldToSearch": "id",
+                        "fieldToCompare": "voce",
+                        "valueToCompare": "GetFromPrezzo"
                     }
                 },
                 "SSL": {
@@ -298,7 +377,23 @@ if (!empty($_FILES['fileupload'])) {
                     },
                     "SSL": {
                         "search": "false",
-                        "fieldToInsert": ""
+                        "fieldToInsert": "prezzo"
+                    },
+                    "TIPOLOGIA": {
+                        "search": "true",
+                        "fieldToInsert": "id_tipologia",
+                        "tableToSearch": "mms_slampdesk_opzioni",
+                        "fieldToSearch": "id",
+                        "fieldToCompare": "valore",
+                        "valueToCompare": "SSL"
+                    },
+                    "LISTINO": {
+                        "search": true,
+                        "fieldToInsert": "id_listino",
+                        "tableToSearch": "mms_slampdesk_listino",
+                        "fieldToSearch": "id",
+                        "fieldToCompare": "voce",
+                        "valueToCompare": "SSL Basic"
                     }
                 },
                 "PEC": {
@@ -318,15 +413,31 @@ if (!empty($_FILES['fileupload'])) {
                     },
                     "PEC": {
                         "search": "false",
-                        "fieldToInsert": ""
+                        "fieldToInsert": "prezzo"
                     },
                     "PEC COSTO": {
                         "search": "false",
-                        "fieldToInsert": ""
+                        "fieldToInsert": "costo"
                     },
                     "SCADENZA PEC": {
                         "search": "false",
-                        "fieldToInsert": ""
+                        "fieldToInsert": "scadenza"
+                    },
+                    "TIPOLOGIA": {
+                        "search": "true",
+                        "fieldToInsert": "id_tipologia",
+                        "tableToSearch": "mms_slampdesk_opzioni",
+                        "fieldToSearch": "id",
+                        "fieldToCompare": "valore",
+                        "valueToCompare": "PEC"
+                    },
+                    "LISTINO": {
+                        "search": true,
+                        "fieldToInsert": "id_listino",
+                        "tableToSearch": "mms_slampdesk_listino",
+                        "fieldToSearch": "id",
+                        "fieldToCompare": "voce",
+                        "valueToCompare": "GetFromPrezzo"
                     }
                 },
                 "COOKIEBOT": {
@@ -346,39 +457,35 @@ if (!empty($_FILES['fileupload'])) {
                     },
                     "COOKIEBOT": {
                         "search": "false",
-                        "fieldToInsert": ""
+                        "fieldToInsert": "prezzo"
                     },
                     "COOKIEBOT COSTO": {
                         "search": "false",
-                        "fieldToInsert": ""
-                    }
-                },
-                "AUT": {
-                    "NOME CLIENTE": {
-                        "search": "true",
-                        "fieldToInsert": "id_anagrafica",
-                        "tableToSearch": "mms_slampdesk_anagrafica",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce"
+                        "fieldToInsert": "costo"
                     },
-                    "DOMINIO": {
+                    "TIPOLOGIA": {
                         "search": "true",
-                        "fieldToInsert": "id_dominio",
-                        "tableToSearch": "mms_slampdesk_domini",
+                        "fieldToInsert": "id_tipologia",
+                        "tableToSearch": "mms_slampdesk_opzioni",
                         "fieldToSearch": "id",
-                        "fieldToCompare": "voce"
+                        "fieldToCompare": "valore",
+                        "valueToCompare": "Cookiebot"
                     },
-                    "AUT": {
-                        "search": "false",
-                        "fieldToInsert": ""
+                    "LISTINO": {
+                        "search": true,
+                        "fieldToInsert": "id_listino",
+                        "tableToSearch": "mms_slampdesk_listino",
+                        "fieldToSearch": "id",
+                        "fieldToCompare": "voce",
+                        "valueToCompare": "Cookiebot"
                     }
                 }
             }
         }';
-        $json = fopen("./configs/SERVIZI_WEB.json", 'r');
-        $contents = fread($json, filesize("./configs/SERVIZI_WEB.json"));
-        $configuration = json_decode($contents);
-        var_dump($configuration);
+        /*$json = fopen("./configs/SERVIZI_WEB.json", 'r');
+        $json = fread($json, filesize("./configs/SERVIZI_WEB.json"));*/
+        $configuration = json_decode($json);
+        //var_dump($configuration);
         $cycles = $configuration->ROWSTEPS;
         $configtablename = $configuration->tablename;
         if ($configuration->controllo === true) {
@@ -408,21 +515,22 @@ if (!empty($_FILES['fileupload'])) {
             foreach ($cycles as $key => $values) {
                 //ROWSTEPS: SERVIZIO => CAMPI
                 $data = array();
-                if (isset($configuration->dataPreset) and is_array($configuration->dataPreset)) {
-                    $data = $configuration->dataPreset;
+                if (isset($configuration->dataPreset)) {
+                    foreach($configuration->dataPreset as $k => $v){
+                        $data[$k] = $v;
+                    }
                 }
                 //la $key indica il tipo di servizio
-
                 foreach ($values as $head => $option) {
                     //
                     //$head indica la colonna del csv
                     //echo $option;
                     $index = $headers[$head];
-                    echo "$head";
-                    foreach ($option as $h => $v) {
+                    //echo "$head";
+                    /*foreach ($option as $h => $v) {
                         // code...
                         echo "$h => $v ";
-                    }
+                    }*/
 
                     if ($option->search == "true") {
                         //cache 
@@ -434,18 +542,23 @@ if (!empty($_FILES['fileupload'])) {
                         $objective = $option->fieldToSearch;
                         $dataKey = $option->fieldToInsert;
 
-                        $csvValue = $row[$index];
-
+                        if(empty($option->valueToCompare))$csvValue = $row[$index];
+                        else{
+                            $csvValue = $option->valueToCompare;
+                            if($csvValue === "GetFromPrezzo"){
+                                if(isset($listino[$key][$data['prezzo']])) $csvValue = $listino[$key][$data['prezzo']];
+                                else echo "<p class='error'>Search fallito, nessun listino trovato per $key, linea $counter: ".$row[$headers['DOMINIO']]." Nome Cliente: ".$row[$headers['DOMINIO']]."</p>";
+                            }
+                        } 
                         if (isset($searchCache[$csvValue])) {
                             //prendo il valore dalla cache
                             $data[$dataKey] = $searchCache[$csvValue];
                         } else {
                             //cerco il valore che mi serve
+                            $csvValue = addslashes($csvValue);
                             $sql = "SELECT $objective FROM $searchTable WHERE $condition LIKE '%$csvValue%'";
-                            
-
                             $ris = $db->query($sql);
-                            
+
                             if (empty($db->error)) {
                                 $result = $ris->fetch_assoc();
                                 //prendo il primo risultato
@@ -456,29 +569,72 @@ if (!empty($_FILES['fileupload'])) {
                             } else {
                                 //errore
                                 echo "<p class='error'>Search fallito per $key => $head Linea " . ($counter + 1) . " Dominio: " . $row[$headers['DOMINIO']] . " Anagrafica: " . $row[$headers['NOME CLIENTE']] . "</p>";
-                                echo "<p>".$db->error['code'].":".$db->error['message']."</p>";
+                                echo "<p>" . $db->error['code'] . ":" . $db->error['message'] . "</p>";
                             }
                         }
-                        echo "<br>";
-                        foreach($data as $k => $v){
+
+                        /*foreach($data as $k => $v){
                             echo "$k => $V";
-                        }
+                        }*/
                         continue;
                     }
                     if ($option->readFromCsv === "false") {
-                        echo "Non sono letto dal csv";
+                        //echo "Non sono letto dal csv";
+                        //dns
+                        if (!empty($option->values) and is_array($option->values)) {
+                            $valFromCsv = $row[$index];
+                            $dataVal = $option->values[$valFromCsv];
+                        }
+                        $dataKey =  $option->fieldToInsert;
+
+                        $data[$dataKey] = $dataVal;
                         continue;
                     }
+
                     $dataKey = $option->fieldToInsert;
                     $dataVal = $row[$index];
 
                     $dataVal = str_replace('€', '', $dataVal);
+                    $dataVal = str_replace(',', '.', $dataVal);
+                    if (is_numeric($dataVal)) $dataval = floatval($dataVal);
 
-                    $data[$dataKey] = $dataVal;
+                    if (!empty($dataVal)) {
+                        $data[$dataKey] = $dataVal;
+                    }
+                    //var_dump($data);
                 }
-
-
-                //$db->insertInto($configtablename, $data);
+                //convertire i valori numerici in veri e propri int nell'array $data
+                echo "<br>$key";
+                foreach ($data as $k => $v) {
+                    if (is_numeric($v)) {
+                        $data[$k] = floatval($v);
+                    }
+                    if($k === "scadenza"){
+                        $v = str_replace('/','-',$v);
+                        $v = date_create($v);
+                        $data[$k] = date_format($v, "Y-m-d H:i:s");
+                    }
+                }
+                if (empty($data['prezzo']) and $key !== "DOMINIO") {
+                    $data = array();
+                }else{
+                    if($key === "DOMINIO"){
+                        //elimino il listino se prezzo non è presente
+                        if(empty($data['prezzo'])){
+                            unset($data['id_listino']);
+                        }
+                    }
+                }
+                //if (empty($data['prezzo']) or empty($data['costo'])) $data = array();
+                echo "<br>";
+                var_dump($data);
+                if (!empty($data)) $ris = $db->insertInto($configtablename, $data);
+                if (!empty($db->error)) {
+                    echo "<p>" . $db->error['code'] . ":" . $db->error['message'] . "</p>";
+                }
+                if($ris === false){
+                    echo "Record già presente";
+                }
             }
         }
 

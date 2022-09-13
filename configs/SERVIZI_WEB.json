@@ -50,12 +50,18 @@
             "TIPOLOGIA": {
                 "search": "true",
                 "fieldToInsert": "id_tipologia",
-                "tableToSearch": "mms_slampdesk_tipologia",
+                "tableToSearch": "mms_slampdesk_opzioni",
                 "fieldToSearch": "id",
-                "fieldToCompare": "voce"
+                "fieldToCompare": "valore",
+                "valueToCompare": "Gest"
             },
             "LISTINO": {
-                "readFromCsv": "false"
+                "search": true,
+                "fieldToInsert": "id_listino",
+                "tableToSearch": "mms_slampdesk_listino",
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce",
+                "valueToCompare": "mantenimento%it"
             }
         },
         "HOSTING": {
@@ -84,6 +90,22 @@
             "SCADENZA HOSTING": {
                 "search": "false",
                 "fieldToInsert": "scadenza"
+            },
+            "TIPOLOGIA": {
+                "search": "true",
+                "fieldToInsert": "id_tipologia",
+                "tableToSearch": "mms_slampdesk_opzioni",
+                "fieldToSearch": "id",
+                "fieldToCompare": "valore",
+                "valueToCompare": "Hosting"
+            },
+            "LISTINO": {
+                "search": true,
+                "fieldToInsert": "id_listino",
+                "tableToSearch": "mms_slampdesk_listino",
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce",
+                "valueToCompare": "GetFromPrezzo"
             }
         },
         "POSTA": {
@@ -103,15 +125,31 @@
             },
             "POSTA": {
                 "search": "false",
-                "fieldToInsert": ""
+                "fieldToInsert": "prezzo"
             },
             "POSTA COSTO": {
                 "search": "false",
-                "fieldToInsert": ""
+                "fieldToInsert": "costo"
             },
             "SCADENZA POSTA": {
                 "search": "false",
-                "fieldToInsert": ""
+                "fieldToInsert": "scadenza"
+            },
+            "TIPOLOGIA": {
+                "search": "true",
+                "fieldToInsert": "id_tipologia",
+                "tableToSearch": "mms_slampdesk_opzioni",
+                "fieldToSearch": "id",
+                "fieldToCompare": "valore",
+                "valueToCompare": "Posta"
+            },
+            "LISTINO": {
+                "search": true,
+                "fieldToInsert": "id_listino",
+                "tableToSearch": "mms_slampdesk_listino",
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce",
+                "valueToCompare": "GetFromPrezzo"
             }
         },
         "SMTP": {
@@ -131,7 +169,7 @@
             },
             "SMTP": {
                 "search": "false",
-                "fieldToInsert": ""
+                "fieldToInsert": "prezzo"
             },
             "SMATP COSTO": {
                 "search": "false",
@@ -139,7 +177,23 @@
             },
             "SCADENZA SMTP": {
                 "search": "false",
-                "fieldToInsert": ""
+                "fieldToInsert": "scadenza"
+            },
+            "TIPOLOGIA": {
+                "search": "true",
+                "fieldToInsert": "id_tipologia",
+                "tableToSearch": "mms_slampdesk_opzioni",
+                "fieldToSearch": "id",
+                "fieldToCompare": "valore",
+                "valueToCompare": "SMTP"
+            },
+            "LISTINO": {
+                "search": true,
+                "fieldToInsert": "id_listino",
+                "tableToSearch": "mms_slampdesk_listino",
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce",
+                "valueToCompare": "GetFromPrezzo"
             }
         },
         "ANTIVIRUS": {
@@ -159,15 +213,31 @@
             },
             "ANTI": {
                 "search": "false",
-                "fieldToInsert": ""
+                "fieldToInsert": "prezzo"
             },
             "ANTI COSTO": {
                 "search": "false",
-                "fieldToInsert": ""
+                "fieldToInsert": "costo"
             },
             "SCANDEZA ANTISPAM": {
                 "search": "false",
-                "fieldToInsert": ""
+                "fieldToInsert": "scadenza"
+            },
+            "TIPOLOGIA": {
+                "search": "true",
+                "fieldToInsert": "id_tipologia",
+                "tableToSearch": "mms_slampdesk_opzioni",
+                "fieldToSearch": "id",
+                "fieldToCompare": "valore",
+                "valueToCompare": "Anti"
+            },
+            "LISTINO": {
+                "search": true,
+                "fieldToInsert": "id_listino",
+                "tableToSearch": "mms_slampdesk_listino",
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce",
+                "valueToCompare": "GetFromPrezzo"
             }
         },
         "SSL": {
@@ -187,7 +257,23 @@
             },
             "SSL": {
                 "search": "false",
-                "fieldToInsert": ""
+                "fieldToInsert": "prezzo"
+            },
+            "TIPOLOGIA": {
+                "search": "true",
+                "fieldToInsert": "id_tipologia",
+                "tableToSearch": "mms_slampdesk_opzioni",
+                "fieldToSearch": "id",
+                "fieldToCompare": "valore",
+                "valueToCompare": "SSL"
+            },
+            "LISTINO": {
+                "search": true,
+                "fieldToInsert": "id_listino",
+                "tableToSearch": "mms_slampdesk_listino",
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce",
+                "valueToCompare": "SSL Basic"
             }
         },
         "PEC": {
@@ -207,15 +293,31 @@
             },
             "PEC": {
                 "search": "false",
-                "fieldToInsert": ""
+                "fieldToInsert": "prezzo"
             },
             "PEC COSTO": {
                 "search": "false",
-                "fieldToInsert": ""
+                "fieldToInsert": "costo"
             },
             "SCADENZA PEC": {
                 "search": "false",
-                "fieldToInsert": ""
+                "fieldToInsert": "scadenza"
+            },
+            "TIPOLOGIA": {
+                "search": "true",
+                "fieldToInsert": "id_tipologia",
+                "tableToSearch": "mms_slampdesk_opzioni",
+                "fieldToSearch": "id",
+                "fieldToCompare": "valore",
+                "valueToCompare": "PEC"
+            },
+            "LISTINO": {
+                "search": true,
+                "fieldToInsert": "id_listino",
+                "tableToSearch": "mms_slampdesk_listino",
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce",
+                "valueToCompare": "GetFromPrezzo"
             }
         },
         "COOKIEBOT": {
@@ -235,31 +337,27 @@
             },
             "COOKIEBOT": {
                 "search": "false",
-                "fieldToInsert": ""
+                "fieldToInsert": "prezzo"
             },
             "COOKIEBOT COSTO": {
                 "search": "false",
-                "fieldToInsert": ""
-            }
-        },
-        "AUT": {
-            "NOME CLIENTE": {
-                "search": "true",
-                "fieldToInsert": "id_anagrafica",
-                "tableToSearch": "mms_slampdesk_anagrafica",
-                "fieldToSearch": "id",
-                "fieldToCompare": "voce"
+                "fieldToInsert": "costo"
             },
-            "DOMINIO": {
+            "TIPOLOGIA": {
                 "search": "true",
-                "fieldToInsert": "id_dominio",
-                "tableToSearch": "mms_slampdesk_domini",
+                "fieldToInsert": "id_tipologia",
+                "tableToSearch": "mms_slampdesk_opzioni",
                 "fieldToSearch": "id",
-                "fieldToCompare": "voce"
+                "fieldToCompare": "valore",
+                "valueToCompare": "Cookiebot"
             },
-            "AUT": {
-                "search": "false",
-                "fieldToInsert": ""
+            "LISTINO": {
+                "search": true,
+                "fieldToInsert": "id_listino",
+                "tableToSearch": "mms_slampdesk_listino",
+                "fieldToSearch": "id",
+                "fieldToCompare": "voce",
+                "valueToCompare": "Cookiebot"
             }
         }
     }
