@@ -125,7 +125,10 @@ if (!empty($_FILES['fileupload'])) {
             "dataPreset": {
                 "enable": 1,
                 "stato": 1,
-                "id_cdc": "1"
+                "id_cdc": 1,
+                "utecreate": 6,
+                "utelastupdate": 6,
+                "groupcreate": 1
             },
             "ROWSTEPS": {
                 "DOMINIO PREZZO": {
@@ -180,6 +183,10 @@ if (!empty($_FILES['fileupload'])) {
                         "fieldToSearch": "id",
                         "fieldToCompare": "voce",
                         "valueToCompare": "mantenimento%it"
+                    },
+                    "F": {
+                        "search": false,
+                        "fieldToInsert": "fattura"
                     }
                 },
                 "HOSTING": {
@@ -224,6 +231,10 @@ if (!empty($_FILES['fileupload'])) {
                         "fieldToSearch": "id",
                         "fieldToCompare": "voce",
                         "valueToCompare": "GetFromPrezzo"
+                    },
+                    "F": {
+                        "search": false,
+                        "fieldToInsert": "fattura"
                     }
                 },
                 "POSTA": {
@@ -268,6 +279,10 @@ if (!empty($_FILES['fileupload'])) {
                         "fieldToSearch": "id",
                         "fieldToCompare": "voce",
                         "valueToCompare": "GetFromPrezzo"
+                    },
+                    "F": {
+                        "search": false,
+                        "fieldToInsert": "fattura"
                     }
                 },
                 "SMTP": {
@@ -312,6 +327,10 @@ if (!empty($_FILES['fileupload'])) {
                         "fieldToSearch": "id",
                         "fieldToCompare": "voce",
                         "valueToCompare": "GetFromPrezzo"
+                    },
+                    "F": {
+                        "search": false,
+                        "fieldToInsert": "fattura"
                     }
                 },
                 "ANTI": {
@@ -356,6 +375,10 @@ if (!empty($_FILES['fileupload'])) {
                         "fieldToSearch": "id",
                         "fieldToCompare": "voce",
                         "valueToCompare": "GetFromPrezzo"
+                    },
+                    "F": {
+                        "search": false,
+                        "fieldToInsert": "fattura"
                     }
                 },
                 "SSL": {
@@ -392,6 +415,10 @@ if (!empty($_FILES['fileupload'])) {
                         "fieldToSearch": "id",
                         "fieldToCompare": "voce",
                         "valueToCompare": "SSL Basic"
+                    },
+                    "F": {
+                        "search": false,
+                        "fieldToInsert": "fattura"
                     }
                 },
                 "PEC": {
@@ -436,6 +463,10 @@ if (!empty($_FILES['fileupload'])) {
                         "fieldToSearch": "id",
                         "fieldToCompare": "voce",
                         "valueToCompare": "GetFromPrezzo"
+                    },
+                    "F": {
+                        "search": false,
+                        "fieldToInsert": "fattura"
                     }
                 },
                 "COOKIEBOT": {
@@ -476,6 +507,10 @@ if (!empty($_FILES['fileupload'])) {
                         "fieldToSearch": "id",
                         "fieldToCompare": "voce",
                         "valueToCompare": "Cookiebot"
+                    },
+                    "F": {
+                        "search": false,
+                        "fieldToInsert": "fattura"
                     }
                 }
             }
@@ -494,6 +529,8 @@ if (!empty($_FILES['fileupload'])) {
         //print_r($headers);
         $row = $csv->getNextRow(); //salto la prima linea che è l'header
         $counter = 1;
+
+        $id_assignment = 1;
 
         while ($row = $csv->getNextRow()) {
             //print_r($row);
@@ -542,10 +579,10 @@ if (!empty($_FILES['fileupload'])) {
 
                         $objective = $option->fieldToSearch;
                         $dataKey = $option->fieldToInsert;
-                     
+
                         if (!isset($option->valueToCompare)) {
-                        
-                         
+
+
                             $csvValue = $row[$index];
                             //echo "<p class='seeme'>$csvValue</p>";
 
@@ -622,10 +659,24 @@ if (!empty($_FILES['fileupload'])) {
                     $dataKey = $option->fieldToInsert;
                     $dataVal = $row[$index];
 
-                    $dataVal = str_replace('€', '', $dataVal);
-                    $dataVal = str_replace('.', '', $dataVal);
-                    $dataVal = str_replace(',', '.', $dataVal);
+                    if (trim($head) === "F") {
+                        if ($dataVal === "Fatturato 2022") {
+                            $dataVal = 1;
+                        } else {
+                            $dataVal = 0;
+                        }
+                        $data[$dataKey] = $dataVal;
+                    }
+
+
+                    if (is_string($dataVal)) {
+                        $dataVal = str_replace('€', '', $dataVal);
+                        $dataVal = str_replace('.', '', $dataVal);
+                        $dataVal = str_replace(',', '.', $dataVal);
+                    }
+
                     if (is_numeric($dataVal)) $dataval = floatval($dataVal);
+
 
                     if (!empty($dataVal)) {
                         $data[$dataKey] = $dataVal;
@@ -662,10 +713,15 @@ if (!empty($_FILES['fileupload'])) {
                         }
                     }
                 }
-                if (empty($data['prezzo']) and $key == "DOMINIO PREZZO") {
+                if (empty($data['prezzo']) and $key === "DOMINIO PREZZO") {
                     unset($data['id_listino']);
                 }
                 //if (empty($data['prezzo']) or empty($data['costo'])) $data = array();
+                
+                //assegnazione id e ordinamento
+                $data['id'] = $id_assignment;
+                $data['ordinamento'] = $id_assignment;
+                $id_assignment++;
                 echo "<br>";
                 var_dump($data);
                 if (!empty($data)) $ris = $db->insertInto($configtablename, $data);

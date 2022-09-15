@@ -7,7 +7,10 @@
     "dataPreset": {
         "enable": 1,
         "stato": 1,
-        "id_cdc": "1"
+        "id_cdc": 1,
+        "utecreate": 6,
+        "utelastupdate": 6,
+        "groupcreate": 1
     },
     "ROWSTEPS": {
         "DOMINIO PREZZO": {
@@ -62,6 +65,10 @@
                 "fieldToSearch": "id",
                 "fieldToCompare": "voce",
                 "valueToCompare": "mantenimento%it"
+            },
+            "F": {
+                "search": false,
+                "fieldToInsert": "fattura"
             }
         },
         "HOSTING": {
@@ -106,6 +113,10 @@
                 "fieldToSearch": "id",
                 "fieldToCompare": "voce",
                 "valueToCompare": "GetFromPrezzo"
+            },
+            "F": {
+                "search": false,
+                "fieldToInsert": "fattura"
             }
         },
         "POSTA": {
@@ -150,6 +161,10 @@
                 "fieldToSearch": "id",
                 "fieldToCompare": "voce",
                 "valueToCompare": "GetFromPrezzo"
+            },
+            "F": {
+                "search": false,
+                "fieldToInsert": "fattura"
             }
         },
         "SMTP": {
@@ -194,6 +209,10 @@
                 "fieldToSearch": "id",
                 "fieldToCompare": "voce",
                 "valueToCompare": "GetFromPrezzo"
+            },
+            "F": {
+                "search": false,
+                "fieldToInsert": "fattura"
             }
         },
         "ANTI": {
@@ -238,6 +257,10 @@
                 "fieldToSearch": "id",
                 "fieldToCompare": "voce",
                 "valueToCompare": "GetFromPrezzo"
+            },
+            "F": {
+                "search": false,
+                "fieldToInsert": "fattura"
             }
         },
         "SSL": {
@@ -274,6 +297,10 @@
                 "fieldToSearch": "id",
                 "fieldToCompare": "voce",
                 "valueToCompare": "SSL Basic"
+            },
+            "F": {
+                "search": false,
+                "fieldToInsert": "fattura"
             }
         },
         "PEC": {
@@ -318,6 +345,10 @@
                 "fieldToSearch": "id",
                 "fieldToCompare": "voce",
                 "valueToCompare": "GetFromPrezzo"
+            },
+            "F": {
+                "search": false,
+                "fieldToInsert": "fattura"
             }
         },
         "COOKIEBOT": {
@@ -358,6 +389,10 @@
                 "fieldToSearch": "id",
                 "fieldToCompare": "voce",
                 "valueToCompare": "Cookiebot"
+            },
+            "F": {
+                "search": false,
+                "fieldToInsert": "fattura"
             }
         }
     }
