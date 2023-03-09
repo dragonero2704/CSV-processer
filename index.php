@@ -2,7 +2,6 @@
 require('./db.php');
 require('./csv.php');
 
-// controllare https://csv.thephpleague.com/ per la libreria di processing del csv
 $error = "";
 if (!empty($_FILES['fileupload'])) {
     try {
@@ -27,7 +26,7 @@ if (!empty($_FILES['fileupload'])) {
     //upload andato a buon fine
     //controllo che il file sia effetivamente un csv
     $filename = $_FILES['fileupload']['name'];
-    if (array_reverse(explode('.', $filename))[0] === 'csv') {
+    if (array_reverse(explode('.', $filename))[0] == 'csv') {
         $csv = new CSV($_FILES['fileupload']);
     } else {
         $error = "Not a CSV file";
@@ -109,419 +108,18 @@ if (!empty($_FILES['fileupload'])) {
         echo "</table></div>";*/
 
         $searchCache = array();
-        //$json = file("./configs/SERVIZI_WEB.json");
+        $json = file("./configs/SERVIZI_WEB.json");
         //print_r($json);
         echo "<br>";
         //var_dump(file_get_contents("./configs/SERVIZI_WEB.json"));
-        //$json = fopen( "./configs/SERVIZI_WEB.json", 'r');
+        // $json = fopen( "./configs/SERVIZI_WEB.json", 'r');
+        $json = file_get_contents("./configs/SERVIZI_WEB.json");
 
-        //var_dump($json);
-        $json = '{
-            "tablename": "mms_slampdesk_anagrafica_servizi_attivi",
-            "controllo": false,
-            "checks": {
-                "F": "Fatturato 2022"
-            },
-            "dataPreset": {
-                "enable": 1,
-                "stato": 1,
-                "id_cdc": 1,
-                "utecreate": 6,
-                "utelastupdate": 6,
-                "groupcreate": 1
-            },
-            "ROWSTEPS": {
-                "DOMINIO PREZZO": {
-                    "NOME CLIENTE": {
-                        "search": true,
-                        "fieldToInsert": "id_anagrafica",
-                        "tableToSearch": "mms_slampdesk_anagrafica",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce"
-                    },
-                    "DOMINIO": {
-                        "search": true,
-                        "fieldToInsert": "id_dominio",
-                        "tableToSearch": "mms_slampdesk_domini",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce"
-                    },
-                    "DNS": {
-                        "readFromCsv": false,
-                        "fieldToInsert": "dns",
-                        "values": {
-                            "Altro": "cliente",
-                            "Register": "B039 Register",
-                            "Promo": "Promo",
-                            "Siteground": "Siteground"
-                        }
-                    },
-                    "DOMINIO PREZZO": {
-                        "search": false,
-                        "fieldToInsert": "prezzo"
-                    },
-                    "DOMINIO COSTO": {
-                        "search": false,
-                        "fieldToInsert": "costo"
-                    },
-                    "SCADENZA DOMINIO": {
-                        "search": false,
-                        "fieldToInsert": "scadenza"
-                    },
-                    "TIPOLOGIA": {
-                        "search": true,
-                        "fieldToInsert": "id_tipologia",
-                        "tableToSearch": "mms_slampdesk_opzioni",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "valore",
-                        "valueToCompare": "Gest"
-                    },
-                    "LISTINO": {
-                        "search": true,
-                        "fieldToInsert": "id_listino",
-                        "tableToSearch": "mms_slampdesk_listino",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce",
-                        "valueToCompare": "mantenimento%it"
-                    },
-                    "F": {
-                        "search": false,
-                        "fieldToInsert": "fattura"
-                    }
-                },
-                "HOSTING": {
-                    "NOME CLIENTE": {
-                        "search": true,
-                        "fieldToInsert": "id_anagrafica",
-                        "tableToSearch": "mms_slampdesk_anagrafica",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce"
-                    },
-                    "DOMINIO": {
-                        "search": true,
-                        "fieldToInsert": "id_dominio",
-                        "tableToSearch": "mms_slampdesk_domini",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce"
-                    },
-                    "HOSTING": {
-                        "search": false,
-                        "fieldToInsert": "prezzo"
-                    },
-                    "HOSTING COSTO": {
-                        "search": false,
-                        "fieldToInsert": "costo"
-                    },
-                    "SCADENZA HOSTING": {
-                        "search": false,
-                        "fieldToInsert": "scadenza"
-                    },
-                    "TIPOLOGIA": {
-                        "search": true,
-                        "fieldToInsert": "id_tipologia",
-                        "tableToSearch": "mms_slampdesk_opzioni",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "valore",
-                        "valueToCompare": "Hosting"
-                    },
-                    "LISTINO": {
-                        "search": true,
-                        "fieldToInsert": "id_listino",
-                        "tableToSearch": "mms_slampdesk_listino",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce",
-                        "valueToCompare": "GetFromPrezzo"
-                    },
-                    "F": {
-                        "search": false,
-                        "fieldToInsert": "fattura"
-                    }
-                },
-                "POSTA": {
-                    "NOME CLIENTE": {
-                        "search": true,
-                        "fieldToInsert": "id_anagrafica",
-                        "tableToSearch": "mms_slampdesk_anagrafica",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce"
-                    },
-                    "DOMINIO": {
-                        "search": true,
-                        "fieldToInsert": "id_dominio",
-                        "tableToSearch": "mms_slampdesk_domini",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce"
-                    },
-                    "POSTA": {
-                        "search": false,
-                        "fieldToInsert": "prezzo"
-                    },
-                    "POSTA COSTO": {
-                        "search": false,
-                        "fieldToInsert": "costo"
-                    },
-                    "SCADENZA POSTA": {
-                        "search": false,
-                        "fieldToInsert": "scadenza"
-                    },
-                    "TIPOLOGIA": {
-                        "search": true,
-                        "fieldToInsert": "id_tipologia",
-                        "tableToSearch": "mms_slampdesk_opzioni",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "valore",
-                        "valueToCompare": "Posta"
-                    },
-                    "LISTINO": {
-                        "search": true,
-                        "fieldToInsert": "id_listino",
-                        "tableToSearch": "mms_slampdesk_listino",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce",
-                        "valueToCompare": "GetFromPrezzo"
-                    },
-                    "F": {
-                        "search": false,
-                        "fieldToInsert": "fattura"
-                    }
-                },
-                "SMTP": {
-                    "NOME CLIENTE": {
-                        "search": true,
-                        "fieldToInsert": "id_anagrafica",
-                        "tableToSearch": "mms_slampdesk_anagrafica",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce"
-                    },
-                    "DOMINIO": {
-                        "search": true,
-                        "fieldToInsert": "id_dominio",
-                        "tableToSearch": "mms_slampdesk_domini",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce"
-                    },
-                    "SMTP": {
-                        "search": false,
-                        "fieldToInsert": "prezzo"
-                    },
-                    "SMATP COSTO": {
-                        "search": false,
-                        "fieldToInsert": ""
-                    },
-                    "SCADENZA SMTP": {
-                        "search": false,
-                        "fieldToInsert": "scadenza"
-                    },
-                    "TIPOLOGIA": {
-                        "search": true,
-                        "fieldToInsert": "id_tipologia",
-                        "tableToSearch": "mms_slampdesk_opzioni",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "valore",
-                        "valueToCompare": "SMTP"
-                    },
-                    "LISTINO": {
-                        "search": true,
-                        "fieldToInsert": "id_listino",
-                        "tableToSearch": "mms_slampdesk_listino",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce",
-                        "valueToCompare": "GetFromPrezzo"
-                    },
-                    "F": {
-                        "search": false,
-                        "fieldToInsert": "fattura"
-                    }
-                },
-                "ANTI": {
-                    "NOME CLIENTE": {
-                        "search": true,
-                        "fieldToInsert": "id_anagrafica",
-                        "tableToSearch": "mms_slampdesk_anagrafica",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce"
-                    },
-                    "DOMINIO": {
-                        "search": true,
-                        "fieldToInsert": "id_dominio",
-                        "tableToSearch": "mms_slampdesk_domini",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce"
-                    },
-                    "ANTI": {
-                        "search": false,
-                        "fieldToInsert": "prezzo"
-                    },
-                    "ANTI COSTO": {
-                        "search": false,
-                        "fieldToInsert": "costo"
-                    },
-                    "SCANDEZA ANTISPAM": {
-                        "search": false,
-                        "fieldToInsert": "scadenza"
-                    },
-                    "TIPOLOGIA": {
-                        "search": true,
-                        "fieldToInsert": "id_tipologia",
-                        "tableToSearch": "mms_slampdesk_opzioni",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "valore",
-                        "valueToCompare": "Anti"
-                    },
-                    "LISTINO": {
-                        "search": true,
-                        "fieldToInsert": "id_listino",
-                        "tableToSearch": "mms_slampdesk_listino",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce",
-                        "valueToCompare": "GetFromPrezzo"
-                    },
-                    "F": {
-                        "search": false,
-                        "fieldToInsert": "fattura"
-                    }
-                },
-                "SSL": {
-                    "NOME CLIENTE": {
-                        "search": true,
-                        "fieldToInsert": "id_anagrafica",
-                        "tableToSearch": "mms_slampdesk_anagrafica",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce"
-                    },
-                    "DOMINIO": {
-                        "search": true,
-                        "fieldToInsert": "id_dominio",
-                        "tableToSearch": "mms_slampdesk_domini",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce"
-                    },
-                    "SSL": {
-                        "search": false,
-                        "fieldToInsert": "prezzo"
-                    },
-                    "TIPOLOGIA": {
-                        "search": true,
-                        "fieldToInsert": "id_tipologia",
-                        "tableToSearch": "mms_slampdesk_opzioni",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "valore",
-                        "valueToCompare": "SSL"
-                    },
-                    "LISTINO": {
-                        "search": true,
-                        "fieldToInsert": "id_listino",
-                        "tableToSearch": "mms_slampdesk_listino",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce",
-                        "valueToCompare": "SSL Basic"
-                    },
-                    "F": {
-                        "search": false,
-                        "fieldToInsert": "fattura"
-                    }
-                },
-                "PEC": {
-                    "NOME CLIENTE": {
-                        "search": true,
-                        "fieldToInsert": "id_anagrafica",
-                        "tableToSearch": "mms_slampdesk_anagrafica",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce"
-                    },
-                    "DOMINIO": {
-                        "search": true,
-                        "fieldToInsert": "id_dominio",
-                        "tableToSearch": "mms_slampdesk_domini",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce"
-                    },
-                    "PEC": {
-                        "search": false,
-                        "fieldToInsert": "prezzo"
-                    },
-                    "PEC COSTO": {
-                        "search": false,
-                        "fieldToInsert": "costo"
-                    },
-                    "SCADENZA PEC": {
-                        "search": false,
-                        "fieldToInsert": "scadenza"
-                    },
-                    "TIPOLOGIA": {
-                        "search": true,
-                        "fieldToInsert": "id_tipologia",
-                        "tableToSearch": "mms_slampdesk_opzioni",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "valore",
-                        "valueToCompare": "PEC"
-                    },
-                    "LISTINO": {
-                        "search": true,
-                        "fieldToInsert": "id_listino",
-                        "tableToSearch": "mms_slampdesk_listino",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce",
-                        "valueToCompare": "GetFromPrezzo"
-                    },
-                    "F": {
-                        "search": false,
-                        "fieldToInsert": "fattura"
-                    }
-                },
-                "COOKIEBOT": {
-                    "NOME CLIENTE": {
-                        "search": true,
-                        "fieldToInsert": "id_anagrafica",
-                        "tableToSearch": "mms_slampdesk_anagrafica",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce"
-                    },
-                    "DOMINIO": {
-                        "search": true,
-                        "fieldToInsert": "id_dominio",
-                        "tableToSearch": "mms_slampdesk_domini",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce"
-                    },
-                    "COOKIEBOT": {
-                        "search": false,
-                        "fieldToInsert": "prezzo"
-                    },
-                    "COOKIEBOT COSTO": {
-                        "search": false,
-                        "fieldToInsert": "costo"
-                    },
-                    "TIPOLOGIA": {
-                        "search": true,
-                        "fieldToInsert": "id_tipologia",
-                        "tableToSearch": "mms_slampdesk_opzioni",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "valore",
-                        "valueToCompare": "Cookiebot"
-                    },
-                    "LISTINO": {
-                        "search": true,
-                        "fieldToInsert": "id_listino",
-                        "tableToSearch": "mms_slampdesk_listino",
-                        "fieldToSearch": "id",
-                        "fieldToCompare": "voce",
-                        "valueToCompare": "Cookiebot"
-                    },
-                    "F": {
-                        "search": false,
-                        "fieldToInsert": "fattura"
-                    }
-                }
-            }
-        }';
-        /*$json = fopen("./configs/SERVIZI_WEB.json", 'r');
-        $json = fread($json, filesize("./configs/SERVIZI_WEB.json"));*/
         $configuration = json_decode($json);
-        //var_dump($configuration);
+        // var_dump($configuration);
         $cycles = $configuration->ROWSTEPS;
         $configtablename = $configuration->tablename;
-        if ($configuration->controllo === true) {
+        if ($configuration->controllo == true) {
             $prechecks = $configuration->checks;
         }
         //scorro il csv riga per riga
@@ -537,13 +135,13 @@ if (!empty($_FILES['fileupload'])) {
             $counter++;
             //operazione da eseguire per ogni linea
             $skip = false;
-            if ($configuration->controllo === true) {
+            if ($configuration->controllo == true) {
                 foreach ($prechecks as $column => $checked_value) {
                     if (trim($row[$headers[$column]]) !== $checked_value) {
                         echo "<p class='error'>Linea " . ($counter + 1) . " saltata: non ha passato i controlli. Dominio: " . $row[$headers[$column]] . " Anagrafica: " . $row[$headers['NOME CLIENTE']] . "</p>";
                         $skip = true;
                     }
-                    if ($skip === true) break;
+                    if ($skip == true) break;
                 }
             }
 
@@ -563,7 +161,7 @@ if (!empty($_FILES['fileupload'])) {
                 $indexKey = $headers[$key];
                 echo "prezzo: $row[$indexKey]";
 
-                if ((empty($row[$indexKey]) or $row[$indexKey] === "0,00" or $row[$indexKey] === "€0,00") and $key !== "DOMINIO PREZZO") {
+                if ((empty($row[$indexKey]) or $row[$indexKey] == "0,00" or $row[$indexKey] == "€0,00") and $key !== "DOMINIO PREZZO") {
                     continue;
                 }
                 //salta se non c'è il prezzo
@@ -571,7 +169,7 @@ if (!empty($_FILES['fileupload'])) {
                     //echo "<p class='seeme'>$head</p>";
                     $index = $headers[$head];
 
-                    if ($option->search === true) {
+                    if ($option->search == true) {
                         //cerca nella tabella corrispondente l'id
                         $searchTable = $option->tableToSearch;
 
@@ -589,7 +187,7 @@ if (!empty($_FILES['fileupload'])) {
                         } else {
                             $csvValue = $option->valueToCompare;
                             //echo "<p class='seeme'>$csvValue</p>";
-                            if ($csvValue === "GetFromPrezzo") {
+                            if ($csvValue == "GetFromPrezzo") {
                                 //echo "prezzo: " . $data['prezzo'];
                                 if (isset($listino[$key][$data['prezzo']])) {
                                     $csvValue = $listino[$key][$data['prezzo']];
@@ -643,7 +241,7 @@ if (!empty($_FILES['fileupload'])) {
                         }*/
                         continue;
                     }
-                    if ($option->readFromCsv === "false") {
+                    if ($option->readFromCsv == "false") {
                         //echo "Non sono letto dal csv";
                         //dns
                         if (!empty($option->values) and is_array($option->values)) {
@@ -659,8 +257,8 @@ if (!empty($_FILES['fileupload'])) {
                     $dataKey = $option->fieldToInsert;
                     $dataVal = $row[$index];
 
-                    if (trim($head) === "F") {
-                        if ($dataVal === "Fatturato 2022") {
+                    if (trim($head) == "F") {
+                        if ($dataVal == "Fatturato 2022") {
                             $dataVal = 1;
                         } else {
                             $dataVal = 0;
@@ -690,8 +288,8 @@ if (!empty($_FILES['fileupload'])) {
                         $data[$k] = floatval($v);
                     }
                     //controllo posta
-                    if ($k === "scadenza") {
-                        if ($key === "POSTA") {
+                    if ($k == "scadenza") {
+                        if ($key == "POSTA") {
                             $v = str_replace('/', '-', $v);
                             $arrayWithEmpty = explode(' ', $v);
                             $tmpStuff = array();
@@ -713,11 +311,11 @@ if (!empty($_FILES['fileupload'])) {
                         }
                     }
                 }
-                if (empty($data['prezzo']) and $key === "DOMINIO PREZZO") {
+                if (empty($data['prezzo']) and $key == "DOMINIO PREZZO") {
                     unset($data['id_listino']);
                 }
                 //if (empty($data['prezzo']) or empty($data['costo'])) $data = array();
-                
+
                 //assegnazione id e ordinamento
                 $data['id'] = $id_assignment;
                 $data['ordinamento'] = $id_assignment;
@@ -728,7 +326,7 @@ if (!empty($_FILES['fileupload'])) {
                 if (!empty($db->error)) {
                     echo "<p>" . $db->error['code'] . ":" . $db->error['message'] . "</p>";
                 }
-                if ($ris === false) {
+                if ($ris == false) {
                     echo "<p class='seeme'>Record già presente</p>";
                 }
             }
