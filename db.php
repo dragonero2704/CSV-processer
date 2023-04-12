@@ -1,10 +1,12 @@
 <?php
+define("DBCONFIG",json_decode(file_get_contents("./configs/db.json")));
+
 class Database { 
     //inserire credenziali database
-    private $hostname = "192.168.80.110:3306";
-    private $dbname = "crmbrand039_db_test";
-    private $username = "crmbrand039test";
-    private $password = "5v!IbzkgBp6Su6";
+    private $hostname = DBCONFIG['hostname'];
+    private $dbname = DBCONFIG['dbname'];
+    private $username = DBCONFIG['username'];
+    private $password = DBCONFIG['password'];
     private $connection = null;
     public $connerror = array();
     public $error = array();
